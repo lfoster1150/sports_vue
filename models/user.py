@@ -40,6 +40,10 @@ class User(db.Model):
         return self.json()
 
     @classmethod
+    def find_by_id(cls, user_id):
+        return User.query.filter_by(id=user_id).first()
+
+    @classmethod
     def find_one(cls, email):
         user = User.query.filter_by(email=email).first()
         return user

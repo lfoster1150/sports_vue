@@ -1,3 +1,4 @@
+from models.db import db
 from flask_restful import Resource
 from flask import request
 from models.user import User
@@ -46,3 +47,20 @@ class Register(Resource):
         user = User(**params)
         user.create()
         return user.json(), 201
+
+
+class Update(Resource):
+    def put(self, user_id):
+        try:
+            data = request.get_json()
+            user = User.find_by_id(user_id)
+            is_password = compare_password(
+                data["old_password"], user.json()["password_digest"])
+            if is_password:
+                new_password_digest = gen_password(data['new_password'])
+                setattr(user, 'password_digest', new_password_digest)
+                db.session.commit()
+                return user.json()
+            return {"msg": "Incorrect Credentials"}, 404
+        except:
+            return {"msg": "Error"}, 404
