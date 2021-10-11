@@ -35,21 +35,21 @@ The Trello board that was used to plan and this project and track development ca
 
 #### Home Page
 
-![User Page](/client/public/ss3.png)
+![User Page]()
 
 #### Team Details Page
 
-![Stack Page](/client/public/ss2.png)
+![Stack Page]()
 
 #### Player Details Page
 
-![Search Page](/client/public/ss1.png)
+![Search Page]()
 
 ### **_Future Updates_**
 
 - [ ] Integrate Statistics from API
-- [ ] Use vue-chartjs to display stats using charts/graphs
-- [ ]
+- [ ] Use vue-chartjs to display stats stylishly using charts/graphs
+- [ ] Add more sports
 - [ ]
 
 ### **_Credits_**
