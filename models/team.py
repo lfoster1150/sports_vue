@@ -40,3 +40,7 @@ class Team(db.Model):
     @classmethod
     def find_by_id(cls, id):
         return Team.query.filter_by(id=id).first()
+
+    @classmethod
+    def find_by_api_id(cls, api_id):
+        return Team.query.filter_by(api_id=api_id).first()

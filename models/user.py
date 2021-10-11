@@ -26,6 +26,7 @@ class User(db.Model):
 
     def json(self):
         return {
+            "id": self.id,
             "name": self.name,
             "email": self.email,
             "password_digest": self.password_digest,

@@ -13,14 +13,15 @@ class Login(Resource):
                 data["password"], user["password_digest"])
             if is_password:
                 payload = {
+                    "id": user["id"],
                     "email": user["email"]
                 }
                 token = create_token(payload)
                 return {"user": payload, "token": token}
             else:
-                return "Incorrect Password", 400
+                return {"msg": "Incorrect Credentials"}, 404
         except:
-            return "ERROR"
+            return {"msg": "Login Error"}, 404
 
 
 class Session(Resource):
@@ -30,7 +31,7 @@ class Session(Resource):
             token = header.split(" ")[1]
         else:
             token = ''
-            return "Invalid Token", 400
+            return {"msg": "Invalid Token"}, 404
         return read_token(token)
 
 
