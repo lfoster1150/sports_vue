@@ -3,7 +3,7 @@ from flask_restful import Api
 from flask_cors import CORS
 from flask_migrate import Migrate
 from models.db import db
-# from resources.<> import <>
+from resources.auth import Login, Register, Session
 from models.user import User
 from models.team import Team
 from models.player import Player
@@ -24,7 +24,9 @@ db.init_app(app)
 migrate = Migrate(app, db)
 
 # Resources
-# api.add_resource(<>, '/<>')
+api.add_resource(Login, '/auth/login')
+api.add_resource(Register, '/auth/register')
+api.add_resource(Session, '/auth/session')
 
 
 if __name__ == '__main__':

@@ -16,7 +16,7 @@ class User(db.Model):
     ), nullable=False, onupdate=datetime.utcnow)
     user_teams = db.relationship('Team', secondary=user_teams, lazy='subquery',
                                  backref=db.backref('teams', lazy=True))
-    user_players = db.relationship('Players', secondary=user_players, lazy='subquery',
+    user_players = db.relationship('Player', secondary=user_players, lazy='subquery',
                                    backref=db.backref('players', lazy=True))
 
     def __init__(self, name, email, password_digest):
