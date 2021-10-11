@@ -13,18 +13,17 @@ class Team(db.Model):
     updated_at = db.Column(db.DateTime, default=datetime.utcnow,
                            nullable=False, onupdate=datetime.now())
 
-    def __init__(self, name, location, mascot, league_id):
+    def __init__(self, name, image, api_id):
         self.name = name
-        self.location = location
-        self.mascot = mascot
-        self.league_id = league_id
+        self.image = image
+        self.api_id = api_id
 
     def json(self):
         return {
             "id": self.id,
             "name": self.name,
-            "image": self.location,
-            "api_id": self.league_id,
+            "image": self.image,
+            "api_id": self.api_id,
             "created_at": str(self.created_at),
             "updated_at": str(self.updated_at)
         }

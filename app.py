@@ -4,7 +4,11 @@ from flask_cors import CORS
 from flask_migrate import Migrate
 from models.db import db
 # from resources.<> import <>
-# from models.<> import <>
+from models.user import User
+from models.team import Team
+from models.player import Player
+from models.user_team import user_teams
+from models.user_player import user_players
 
 
 app = Flask(__name__)
