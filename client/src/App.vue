@@ -1,6 +1,10 @@
 <template>
   <v-app>
-    <Nav />
+    <Nav
+      :authenticated="authenticated"
+      :user="user"
+
+    />
     <v-main>
       <v-container fluid>
         <router-view></router-view>
@@ -11,16 +15,31 @@
 
 <script>
 import Nav from './components/Nav.vue'
+import {CheckSession} from './services/Auth'
 export default {
   name: 'App',
 
   components: {
     Nav
   },
-
+  mount() {
+    const token = localStorage.getItem('token')
+    if (token) {
+      this.checkToken()
+    }
+  },
   data: () => ({
-    //
+    authenticated: false,
+    user: null
   }),
+  methods: {
+    async checkToken() {
+      const session = await CheckSession()
+      this.user = session
+      this.authenticated = true
+    }
+    
+  }
 };
 </script>
 

@@ -68,6 +68,11 @@
 
 <script>
 export default {
+  name: "Nav",
+  props: {
+    authenticated: String,
+    user: Object
+  },
   data: () => ({
       drawer: false,
       group: null,
@@ -82,6 +87,9 @@ export default {
     goToUserPage(userId) {
       this.$router.push(`/user/${userId}`)
     },
+    signOut() {
+      this.$emit('handleLogOut')
+    }
   }
 }
 </script>
