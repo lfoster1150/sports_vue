@@ -6,11 +6,14 @@
         dark
       >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-toolbar-title>SportsVue</v-toolbar-title>
 
       <v-spacer></v-spacer>
-      <v-btn icon>
-        <v-icon>mdi-home</v-icon>
-      </v-btn>
+      <router-link to="/">
+        <v-btn icon>
+          <v-icon>mdi-home</v-icon>
+        </v-btn>
+      </router-link>
     <v-menu>
       <template v-slot:activator="{ on, attrs }">
           <v-btn
@@ -22,10 +25,9 @@
           </v-btn>
       </template>
       <v-list>
-        <v-list-item @click="goToUserPage">
-          <v-list-item-title>User Page</v-list-item-title>
-        </v-list-item>
-
+          <v-list-item @click="goToUserPage(userId)">
+            <v-list-item-title>User Page</v-list-item-title>
+          </v-list-item>
         <v-list-item @click="signIn">
           <v-list-item-title>Sign In</v-list-item-title>
         </v-list-item>
@@ -35,8 +37,6 @@
         </v-list-item>
       </v-list>
     </v-menu>
-
-
 
     </v-app-bar>
     <v-navigation-drawer
@@ -54,11 +54,11 @@
             <router-link to="/">
               <v-list-item>Home</v-list-item>
             </router-link>
-            <router-link to="/teams">
-              <v-list-item>Teams</v-list-item>
+            <router-link to="/register">
+              <v-list-item>Register</v-list-item>
             </router-link>
-            <router-link to="/players">
-              <v-list-item>Players</v-list-item>
+            <router-link to="/login">
+              <v-list-item>Login</v-list-item>
             </router-link>
         </v-list-item-group>
       </v-list>
@@ -71,11 +71,26 @@ export default {
   data: () => ({
       drawer: false,
       group: null,
+      userId: "1"
     }),
   watch: {
     group () {
         this.drawer = false
       },
     },
+  methods: {
+    goToUserPage(userId) {
+      this.$router.push(`/user/${userId}`)
+    },
+  }
 }
 </script>
+
+<style scoped>
+  a {
+    text-decoration: none;
+  }
+  .v-list-item:hover {
+    cursor: pointer;
+  }
+</style>
