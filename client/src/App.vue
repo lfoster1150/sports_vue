@@ -37,6 +37,9 @@ export default {
       const session = await CheckSession()
       this.user = session
       this.authenticated = true
+    },
+    handleLogout() {
+      console.log("Logging Out")
     }
     
   }
@@ -44,7 +47,5 @@ export default {
 </script>
 
 <style scoped>
-/* .v-main {
-  background-color: black;
-} */
+
 </style>

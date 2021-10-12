@@ -89,6 +89,9 @@ export default {
     },
     signOut() {
       this.$emit('handleLogOut')
+    },
+    signIn() {
+      this.$router.push(`/login`)
     }
   }
 }

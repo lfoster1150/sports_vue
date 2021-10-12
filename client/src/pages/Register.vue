@@ -71,6 +71,8 @@ export default {
       validate () {
         if (this.$refs.form.validate()) {
           RegisterUser({...this.newUser})
+          // this.newUser = {name: '',email: '',password: ''}
+          // props.history.push('/login')
         }
       },
       reset () {
