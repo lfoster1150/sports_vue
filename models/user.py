@@ -39,6 +39,11 @@ class User(db.Model):
         db.session.commit()
         return self.json()
 
+    def create_user_team(self, team_id):
+        self.user_teams.append({"user_id": self.id, "team_id": team_id})
+        db.session.commit()
+        return self.json()
+
     @classmethod
     def find_by_id(cls, user_id):
         return User.query.filter_by(id=user_id).first()

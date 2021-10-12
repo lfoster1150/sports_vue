@@ -40,3 +40,7 @@ class Player(db.Model):
     @classmethod
     def find_by_id(cls, id):
         return Player.query.filter_by(id=id).first()
+
+    @classmethod
+    def find_by_api_id(cls, api_id):
+        return Player.query.filter_by(api_id=api_id).first()
