@@ -3,7 +3,7 @@
     <Nav
       :authenticated="authenticated"
       :user="user"
-
+      @handleLogOut="handleLogOut"
     />
     <v-main>
       <v-container fluid>
