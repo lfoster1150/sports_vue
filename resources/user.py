@@ -13,11 +13,12 @@ class UserById(Resource):
     def get(self, user_id):
         user = User.query.options(joinedload(
             'user_teams')).filter_by(id=user_id).first()
-        teams = user.user_teams
-        results = [t.json() for t in teams]
+        teams = [t.json() for t in user.user_teams]
+        players = [p.json() for p in user.user_players]
         return {
             **user.json(),
-            "league": results
+            "teams": teams,
+            "players": players
         }
 
 
