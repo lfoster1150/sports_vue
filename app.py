@@ -3,7 +3,7 @@ from flask_restful import Api
 from flask_cors import CORS
 from flask_migrate import Migrate
 from models.db import db
-from resources.user import UserTeams, UserTeamsById, UserById
+from resources.user import UserTeams, UserTeamsById, UserById, UserPlayers
 from resources.auth import Delete, Login, Register, Session, Update
 from resources.team import Teams, TeamDetails, TeamAPI
 from resources.player import Players, PlayerDetails, PlayerAPI
@@ -33,6 +33,7 @@ api.add_resource(Session, '/auth/session')
 api.add_resource(Update, '/auth/update/<int:user_id>')
 api.add_resource(Delete, '/auth/delete/<int:user_id>')
 api.add_resource(UserTeams, '/api/user/teams')
+api.add_resource(UserPlayers, '/api/user/players')
 api.add_resource(UserById, '/api/user/<int:user_id>')
 api.add_resource(UserTeamsById, '/api/user/teams/<int:user_id>')
 api.add_resource(Teams, '/api/teams')

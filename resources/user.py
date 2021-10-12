@@ -1,6 +1,7 @@
 from models.db import db
 from models.user import User
 from models.team import Team
+from models.player import Player
 from models.user_team import user_teams
 from flask_restful import Resource
 from flask import request
@@ -46,7 +47,7 @@ class UserTeams(Resource):
         team = Team.find_by_id(data["team_id"])
         user.user_teams.append(team)
         db.session.commit()
-        return {"user": user.json()["name"], "payload": data}, 201
+        return {"user": user.json()["email"], "payload": data}, 201
 
     def delete(self):
         data = request.get_json()
@@ -54,4 +55,23 @@ class UserTeams(Resource):
         team = Team.find_by_id(data["team_id"])
         user.user_teams.remove(team)
         db.session.commit()
-        return {"user_delete": user.json()["name"], "payload": data}, 201
+        return {"user": user.json()["email"], "payload": data}, 201
+
+
+class UserPlayers(Resource):
+
+    def post(self):
+        data = request.get_json()
+        user = User.find_by_id(data["user_id"])
+        player = Player.find_by_id(data["player_id"])
+        user.user_players.append(player)
+        db.session.commit()
+        return {"user": user.json()["email"], "payload": data}, 201
+
+    def delete(self):
+        data = request.get_json()
+        user = User.find_by_id(data["user_id"])
+        player = Player.find_by_id(data["player_id"])
+        user.user_players.remove(player)
+        db.session.commit()
+        return {"user": user.json()["email"], "payload": data}, 201
