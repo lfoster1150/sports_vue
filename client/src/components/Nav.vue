@@ -70,7 +70,7 @@
 export default {
   name: "Nav",
   props: {
-    authenticated: String,
+    authenticated: Boolean,
     user: Object
   },
   data: () => ({

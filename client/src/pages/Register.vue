@@ -7,28 +7,21 @@
         lazy-validation
       >
         <v-text-field
-          name="name"
-          :value="newUser.name"
-          v-model="name"
-          :counter="10"
+          v-model="newUser.name"
           :rules="[v => !!v || 'Name is required']"
           label="Name"
           required
         ></v-text-field>
 
         <v-text-field
-          name="email"
-          :value="newUser.email"
-          v-model="email"
+          v-model="newUser.email"
           :rules="emailRules"
           label="Email"
           required
         ></v-text-field>
 
         <v-text-field
-          name="password"
-          :value="newUser.password"
-          v-model="password"
+          v-model="newUser.password"
           :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
           :rules="[value => !!value || 'Password is required']"
           :type="show ? 'text' : 'password'"
@@ -59,6 +52,7 @@
 <script>
 import {RegisterUser} from '../services/Auth'
 export default {
+  name: "Register",
   data: () => ({
       show: false,
       valid: true,
@@ -76,7 +70,7 @@ export default {
     methods: {
       validate () {
         if (this.$refs.form.validate()) {
-          RegisterUser(this.newUser)
+          RegisterUser({...this.newUser})
         }
       },
       reset () {
@@ -92,5 +86,6 @@ export default {
 <style scoped>
   .v-btn {
     margin-right: 1em;
+    margin-top: 1em;
   }
 </style>
