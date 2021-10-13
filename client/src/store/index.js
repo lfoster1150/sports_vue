@@ -11,12 +11,18 @@ const state = {
 const mutations = {
   setUser(state, user) {
     state.user = user
+  },
+  toggleAuthenticated(state, authenticated) {
+    state.authenticated = authenticated
   }
 }
 
 const actions = {
   setUser(context, user) {
     context.commit('setUser', user)
+  },
+  toggleAuthenticated(context, authenticated) {
+    context.commit('toggleAuthenticated', authenticated)
   }
 }
 

@@ -27,12 +27,7 @@ class Login(Resource):
 
 class Session(Resource):
     def get(self):
-        header = request.headers.get('Authorization')
-        if request.headers.get('Authorization'):
-            token = header.split(" ")[1]
-        else:
-            token = ''
-            return {"msg": "Invalid Token"}, 404
+        token = strip_token(request)
         return read_token(token)
 
 

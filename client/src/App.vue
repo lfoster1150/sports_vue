@@ -1,10 +1,6 @@
 <template>
   <v-app>
-    <Nav
-      :authenticated="authenticated"
-      :user="user"
-      @handleLogOut="handleLogOut"
-    />
+    <Nav />
     <v-main>
       <v-container fluid>
         <router-view></router-view>
@@ -15,7 +11,7 @@
 
 <script>
 import Nav from './components/Nav.vue'
-import {CheckSession} from './services/Auth'
+import { CheckSession } from './services/Auth'
 import { mapActions, mapState } from 'vuex'
 export default {
   name: 'App',
@@ -27,17 +23,13 @@ export default {
     if (token) {
       this.checkToken()
     }
-    console.log("mount")
   },
   methods: {
-    ...mapActions(['setUser']),
+    ...mapActions(['setUser','toggleAuthenticated']),
     async checkToken() {
       const session = await CheckSession()
-      this.user = session
-      this.authenticated = true
-    },
-    handleLogout() {
-      console.log("Logging Out")
+      this.setUser(session)
+      this.toggleAuthenticated(true)
     },
     setUserInState(user) {
       this.setUser(user)

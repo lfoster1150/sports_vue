@@ -37,6 +37,7 @@
 
 <script>
 import { SignInUser } from "../services/Auth"
+import { mapActions, mapState } from 'vuex'
 export default {
   name: "Login",
   data: () => ({
@@ -53,24 +54,28 @@ export default {
       ],
   }),
   methods: {
+    ...mapActions(['setUser']),
     validate () {
       if (this.$refs.form.validate()) {
-        this.login()
+        this.handleLogin()
       }
     },
-    async login() {
+    async handleLogin() {
       const payload = await SignInUser(this.existingUser)
       if (payload){
-        this.existingUser = { email: '', password: '' }
+        this.setUser(payload)
         this.loginFailed = false;
-        this.handeLogIn(payload, true)
+        this.$router.push('/feed')
       }
       this.loginFailed = true;
-      // props.history.push('/feed')
     },
     handeLogIn(user, isAuthenticated) {
       this.$emit('handleLogIn', user, isAuthenticated)
     },
-  }
+  },
+  computed: mapState({
+    user: state => state.user,
+    authenticated: state => state.authenticated
+  }),
 }
 </script>

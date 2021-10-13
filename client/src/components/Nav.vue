@@ -67,16 +67,12 @@
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex'
 export default {
   name: "Nav",
-  props: {
-    authenticated: Boolean,
-    user: Object
-  },
   data: () => ({
       drawer: false,
       group: null,
-      userId: "1"
     }),
   watch: {
     group () {
@@ -84,6 +80,7 @@ export default {
       },
     },
   methods: {
+    ...mapActions(['toggleAuthenticated']),
     goToUserPage(userId) {
       this.$router.push(`/user/${userId}`)
     },
@@ -93,7 +90,11 @@ export default {
     signIn() {
       this.$router.push(`/login`)
     }
-  }
+  },
+  computed: mapState({
+    user: state => state.user,
+    authenticated: state => state.authenticated
+  }),
 }
 </script>
 
