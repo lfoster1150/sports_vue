@@ -12,11 +12,9 @@
           label="Email"
           required
         ></v-text-field>
-
         <v-text-field
           v-model="existingUser.password"
           :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
-          :rules="[value => !!value || 'Password is required']"
           :type="show ? 'text' : 'password'"
           label="Password"
           @click:append="show = !show"
@@ -73,7 +71,7 @@ export default {
       if (payload){
         this.setUser(payload)
         this.loginFailed = false;
-        this.$router.push('/feed')
+        this.$router.push('/')
       }
       this.loginFailed = true;
     },

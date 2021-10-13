@@ -25,14 +25,13 @@
           </v-btn>
       </template>
       <v-list>
-          <v-list-item @click="goToUserPage(userId)">
+          <v-list-item v-if="authenticated && user" @click="goToUserPage(userId)">
             <v-list-item-title>User Page</v-list-item-title>
           </v-list-item>
-        <v-list-item @click="signIn">
+        <v-list-item v-if="!authenticated && !user" @click="signIn">
           <v-list-item-title>Sign In</v-list-item-title>
         </v-list-item>
-
-        <v-list-item @click="signOut">
+        <v-list-item v-else @click="signOut">
           <v-list-item-title>Sign Out</v-list-item-title>
         </v-list-item>
       </v-list>
@@ -55,10 +54,7 @@
               <v-list-item>Home</v-list-item>
             </router-link>
             <router-link to="/register">
-              <v-list-item>Register</v-list-item>
-            </router-link>
-            <router-link to="/login">
-              <v-list-item>Login</v-list-item>
+              <v-list-item v-if="!authenticated && !user">Register</v-list-item>
             </router-link>
         </v-list-item-group>
       </v-list>
@@ -90,7 +86,7 @@ export default {
       this.$router.push(`/`)
     },
     signIn() {
-      this.$router.push(`/login`)
+      this.$router.push(`/`)
     }
   },
   computed: mapState({
