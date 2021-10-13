@@ -21,14 +21,22 @@
           label="Password"
           @click:append="show = !show"
         ></v-text-field>
-
-        <v-btn
-          :disabled="!valid"
-          color="success"
-          @click="validate"
-        >
-          Login
-        </v-btn>
+        <v-row>
+          <v-btn
+            :disabled="!valid"
+            color="success"
+            @click="validate"
+          >
+            Login
+          </v-btn>
+          <v-spacer></v-spacer>
+          <v-btn
+            color="primary"
+            @click="registerPage"
+          >
+            Register
+          </v-btn>
+        </v-row>
         <v-subheader v-if="loginFailed" class="error--text">Login Failed</v-subheader>
       </v-form>
     </template>
@@ -71,6 +79,9 @@ export default {
     },
     handeLogIn(user, isAuthenticated) {
       this.$emit('handleLogIn', user, isAuthenticated)
+    },
+    registerPage() {
+      this.$router.push('/register')
     },
   },
   computed: mapState({

@@ -80,12 +80,14 @@ export default {
       },
     },
   methods: {
-    ...mapActions(['toggleAuthenticated']),
+    ...mapActions(['toggleAuthenticated','setUser']),
     goToUserPage(userId) {
       this.$router.push(`/user/${userId}`)
     },
     signOut() {
-      this.$emit('handleLogOut')
+      this.setUser(null)
+      this.toggleAuthenticated(false)
+      this.$router.push(`/`)
     },
     signIn() {
       this.$router.push(`/login`)
@@ -104,5 +106,8 @@ export default {
   }
   .v-list-item:hover {
     cursor: pointer;
+  }
+  .router-link-active > .v-btn > .v-btn__content > .v-icon {
+    color: "primary"
   }
 </style>
