@@ -8,6 +8,12 @@ const state = {
   authenticated: false
 }
 
+const getters = {
+  isAuthenticated() {
+    return state.authenticated
+  }
+}
+
 const mutations = {
   setUser(state, user) {
     state.user = user
@@ -29,5 +35,6 @@ const actions = {
 export default new Vuex.Store({
   state,
   mutations,
-  actions
+  actions,
+  getters
 })

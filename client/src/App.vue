@@ -30,9 +30,6 @@ export default {
       const session = await CheckSession(token)
       this.setUser(session)
       this.toggleAuthenticated(true)
-    },
-    setUserInState(user) {
-      this.setUser(user)
     }
   },
   computed: mapState({
