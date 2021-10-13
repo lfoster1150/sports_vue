@@ -16,23 +16,21 @@
 <script>
 import Nav from './components/Nav.vue'
 import {CheckSession} from './services/Auth'
+import { mapActions, mapState } from 'vuex'
 export default {
   name: 'App',
-
   components: {
     Nav
   },
-  mount() {
+  mounted() {
     const token = localStorage.getItem('token')
     if (token) {
       this.checkToken()
     }
+    console.log("mount")
   },
-  data: () => ({
-    authenticated: false,
-    user: null
-  }),
   methods: {
+    ...mapActions(['setUser']),
     async checkToken() {
       const session = await CheckSession()
       this.user = session
@@ -40,9 +38,16 @@ export default {
     },
     handleLogout() {
       console.log("Logging Out")
+    },
+    setUserInState(user) {
+      this.setUser(user)
     }
-    
-  }
+  },
+  computed: mapState({
+    user: state => state.user,
+    authenticated: state => state.authenticated
+  }),
+  
 };
 </script>
 
