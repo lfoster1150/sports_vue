@@ -28,6 +28,7 @@ class Login(Resource):
 class Session(Resource):
     def get(self):
         token = strip_token(request)
+        print("XXXXXXXXXXXXXXXXXXXXXXXXXXXXX", token)
         return read_token(token)
 
 

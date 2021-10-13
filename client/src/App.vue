@@ -21,13 +21,13 @@ export default {
   mounted() {
     const token = localStorage.getItem('token')
     if (token) {
-      this.checkToken()
+      this.checkToken(token)
     }
   },
   methods: {
     ...mapActions(['setUser','toggleAuthenticated']),
-    async checkToken() {
-      const session = await CheckSession()
+    async checkToken(token) {
+      const session = await CheckSession(token)
       this.setUser(session)
       this.toggleAuthenticated(true)
     },

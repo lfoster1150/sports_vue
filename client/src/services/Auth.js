@@ -20,10 +20,12 @@ export const RegisterUser = async data => {
   // }
 }
 
-export const CheckSession = async () => {
+export const CheckSession = async token => {
   // try {
   // Checks if the current token if it exists is valid
-  const res = await Client.get('/auth/session')
+  const res = await Client.get('/auth/session', {
+    headers: { Authorization: token }
+  })
   return res.data
   // } catch (error) {
   //   throw error

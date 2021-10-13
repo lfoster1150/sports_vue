@@ -32,7 +32,7 @@ def compare_password(password, hashed_password):
 
 def strip_token(req):
     try:
-        token = req.headers['Authorization'].split(' ')[1]
+        token = req.headers['Authorization']
         return token
     except:
         return None
