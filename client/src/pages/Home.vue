@@ -7,6 +7,8 @@
     <p class="text-h5 text--primary">
       Choose A Country To See Leagues:
     </p>
+  </v-container>
+  <v-container fluid class="d-flex .flex-row flex-wrap">
     <CountryCard 
       v-for="country in countries"
       :key="country.code"
@@ -21,13 +23,17 @@
 <script>
 import Login from '../components/Login.vue'
 import CountryCard from '../components/CountryCard.vue'
-import { GetLeaguesByCountryCode } from '../services/FootballApiServices'
 import { mapState } from 'vuex'
 export default {
   name: 'Home',
   data: () => ({
     countries: [
-      {name: "England", code: "gb" }
+      {name: "England", code: "gb" },
+      {name: "Spain", code: "es" },
+      {name: "Germany", code: "de" },
+      {name: "Italy", code: "it" },
+      {name: "France", code: "fr" },
+      {name: "United States", code: "us" },
     ]
   }),
   components: {
@@ -39,18 +45,9 @@ export default {
     authenticated: state => state.authenticated
   }),
   methods: {
-    getLeagues() {
-      // const leagues = GetLeagues()
-      // console.log(leagues)
-      // this.leagues = getLeagues
-    },
     async selectCountry(code) {
-      const leagues = await GetLeaguesByCountryCode(code)
-      console.log(leagues)
+      this.$router.push(`/country/${code}`)
     }
-  },
-  mounted() {
-    this.getLeagues()
   }
 }
 </script>

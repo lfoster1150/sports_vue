@@ -5,12 +5,16 @@ Vue.use(Vuex)
 
 const state = {
   user: null,
-  authenticated: false
+  authenticated: false,
+  footballQueries: []
 }
 
 const getters = {
   isAuthenticated() {
     return state.authenticated
+  },
+  getFootballQueriesByCountry: state => id => {
+    return state.footballQueries.find(query => query.parameters.code === id)
   }
 }
 
@@ -20,6 +24,9 @@ const mutations = {
   },
   toggleAuthenticated(state, authenticated) {
     state.authenticated = authenticated
+  },
+  addQuery(state, query) {
+    state.footballQueries.append(query)
   }
 }
 
@@ -29,6 +36,9 @@ const actions = {
   },
   toggleAuthenticated(context, authenticated) {
     context.commit('toggleAuthenticated', authenticated)
+  },
+  addQuery(context, query) {
+    context.commit('addQuery', query)
   }
 }
 

@@ -2,11 +2,13 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from './pages/Home'
 import Register from './pages/Register'
+import Country from './pages/Country'
 // import store from './store/index'
 
 const routes = [
   { path: '/', component: Home, name: 'Home' },
-  { path: '/register', component: Register, name: 'Register' }
+  { path: '/register', component: Register, name: 'Register' },
+  { path: '/country/:code', component: Country, name: 'Country' }
 ]
 
 Vue.use(VueRouter)
