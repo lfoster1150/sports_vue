@@ -27,7 +27,6 @@ export const GetLeaguesByCountryCode = async code => {
 }
 
 export const GetTeamsByLeagueId = async leagueId => {
-  console.log('Query not found')
   const res = await FootballClient.get(
     `https://v3.football.api-sports.io/teams?league=${leagueId}&&season=2021`
   )
