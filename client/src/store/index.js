@@ -1,5 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import { Store } from 'vuex'
+import createCache from 'vuex-cache'
+const BASE_URL = `https://v3.football.api-sports.io`
 
 Vue.use(Vuex)
 
@@ -15,6 +18,12 @@ const getters = {
   },
   getFootballQueriesByCountry: state => id => {
     return state.footballQueries.find(query => query.parameters.code === id)
+  },
+  getFootballQueriesByLeagueId: state => id => {
+    const query = state.footballQueries.find(
+      query => query.parameters.league === id
+    )
+    return query
   }
 }
 
@@ -26,7 +35,10 @@ const mutations = {
     state.authenticated = authenticated
   },
   addQuery(state, query) {
-    state.footballQueries = state.footballQueries.append(query)
+    state.footballQueries.push(query)
+  },
+  setQuery(state, query) {
+    state.query = query
   }
 }
 
@@ -39,10 +51,21 @@ const actions = {
   },
   addQuery(context, query) {
     context.commit('addQuery', query)
+  },
+  FETCH_QUERY_BY_LEAGUE_ID: async (_, id) => {
+    const response = await fetch(`${BASE_URL}/teams?league=${id}&&season=2021`)
+    const teams = await response.json()
+    console.log('response', teams)
+    return teams
   }
 }
 
+const store = new Store({
+  plugins: [createCache()]
+})
+
 export default new Vuex.Store({
+  store,
   state,
   mutations,
   actions,
