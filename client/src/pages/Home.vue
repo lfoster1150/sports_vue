@@ -5,16 +5,17 @@
   </v-container>
   <v-container>
     <p class="text-h5 text--primary">
-      Choose A Country To See Leagues:
+      Top Leagues:
     </p>
+    <LeagueCard
+        v-for="league in leagues"
+        :key="league.id"
+        :league="league"
+        @selectLeague="selectLeague"
+      />
   </v-container>
   <v-container fluid class="d-flex .flex-row flex-wrap">
-    <CountryCard 
-      v-for="country in countries"
-      :key="country.code"
-      :country="country"
-      @selectCountry="selectCountry"
-    />
+
   </v-container>
 </v-container>
   
@@ -22,31 +23,34 @@
 
 <script>
 import Login from '../components/Login.vue'
-import CountryCard from '../components/CountryCard.vue'
 import { mapState } from 'vuex'
 export default {
   name: 'Home',
   data: () => ({
-    countries: [
-      {name: "England", code: "gb" },
-      {name: "Spain", code: "es" },
-      {name: "Germany", code: "de" },
-      {name: "Italy", code: "it" },
-      {name: "France", code: "fr" },
-      {name: "United States", code: "us" },
+    leagues: [
+      {name: "Premier League", id: "570", location: "England" },
+      {name: "Championship", id: "40", location: "England" },
+      {name: "La Liga", id: "140", location: "Spain"},
+      {name: "Segunda Division", id: "141", location: "Spain"},
+      {name: "Bundesliga 1", id: "78", location: "Germany"},
+      {name: "Bundesliga 2", id: "79", location: "Germany"},
+      {name: "Serie A", id: "135", location: "Italy"},
+      {name: "Serie B", id: "136", location: "Italy"},
+      {name: "Ligue 1", id: "61", location: "France"},
+      {name: "Ligue 2", id: "62", location: "France"},
+      {name: "Major League Soccer", id: "263", location: "United States"},
     ]
   }),
   components: {
-    Login,
-    CountryCard
+    Login
   },
   computed: mapState({
     user: state => state.user,
     authenticated: state => state.authenticated
   }),
   methods: {
-    async selectCountry(code) {
-      this.$router.push(`/country/${code}`)
+    async selectLeague(leagueId) {
+      this.$router.push(`/league/${leagueId}`)
     }
   }
 }

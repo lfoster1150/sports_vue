@@ -26,7 +26,7 @@ const mutations = {
     state.authenticated = authenticated
   },
   addQuery(state, query) {
-    state.footballQueries.append(query)
+    state.footballQueries = state.footballQueries.append(query)
   }
 }
 

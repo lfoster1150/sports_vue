@@ -1,19 +1,21 @@
 <template>
-    <v-card
+    <v-sheet
       class="mx-auto my-2"
-      max-width="344"
-      @click="selectCountry(country.code)"
+      max-width="100"
+      @click="selectLeague(league.id)"
     >
       <v-img
-      class="rounded-circle"
-        :src="`https://media.api-sports.io/flags/${country.code}.svg`"
-        height="200px"
+        aspect-ratio="1"
+        class="grey lighten-2 rounded-circle"
+        :src="`https://media.api-sports.io/football/leagues/${league.id}.png`"
+        width="100"
       >
       </v-img>
           <v-card-title 
-          class="text-h4 text--primary"
-          v-text="country.name"></v-card-title>
-    </v-card>
+          fluid
+          class="text-p mx-auto text--primary"
+          v-text="league.name"></v-card-title>
+    </v-sheet>
 </template>
 
 <script>
