@@ -69,5 +69,4 @@ export default {
   .v-avatar:hover {
     cursor: pointer;
   }
-
 </style>

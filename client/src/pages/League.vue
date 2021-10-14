@@ -1,18 +1,19 @@
 <template>
-  <v-container fluid class="d-flex flex-row flex-wrap">
-      <!-- <LeagueCard
-        v-for="league in leagues"
-        :key="league.id"
-        :league="league"
-        @selectLeague="selectLeague"
-      /> -->
+  <v-container fluid class="d-flex flex-row flex-wrap justify-space-around">
+    <TeamCard
+      v-for="team in teams"
+      :key="team.team.id"
+      :team="team.team"
+      @selectTeam="selectTeam"
+      @favoriteTeam="favoriteTeam"
+    />
   </v-container>
 </template>
 
 <script>
 import { mapState } from 'vuex'
 import { mapCacheActions } from 'vuex-cache';
-// import TeamCard from '../components/TeamCard.vue'
+import TeamCard from '../components/TeamCard.vue'
 
 export default {
   name: 'League',
@@ -20,7 +21,7 @@ export default {
     teams: null
   }),
   components: {
-    // TeamCard
+    TeamCard
   },
   computed: {
     ...mapState({
@@ -34,6 +35,9 @@ export default {
     async getLeagueTeams(leagueId) {
       let results = await this.FETCH_QUERY_BY_LEAGUE_ID(leagueId)
       this.teams = results
+    },
+    selectTeam(teamId) {
+      console.log(teamId)
     }
   },
   async mounted() {
