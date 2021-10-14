@@ -24,11 +24,12 @@
 <script>
 import Login from '../components/Login.vue'
 import { mapState } from 'vuex'
+import LeagueCard from '../components/LeagueCard.vue'
 export default {
   name: 'Home',
   data: () => ({
     leagues: [
-      {name: "Premier League", id: "570", location: "England" },
+      {name: "Premier League", id: "39", location: "England" },
       {name: "Championship", id: "40", location: "England" },
       {name: "La Liga", id: "140", location: "Spain"},
       {name: "Segunda Division", id: "141", location: "Spain"},
@@ -38,11 +39,12 @@ export default {
       {name: "Serie B", id: "136", location: "Italy"},
       {name: "Ligue 1", id: "61", location: "France"},
       {name: "Ligue 2", id: "62", location: "France"},
-      {name: "Major League Soccer", id: "263", location: "United States"},
+      {name: "Major League Soccer", id: "253", location: "United States"},
     ]
   }),
   components: {
-    Login
+    Login,
+    LeagueCard
   },
   computed: mapState({
     user: state => state.user,

@@ -1,21 +1,54 @@
 <template>
-    <v-sheet
-      class="mx-auto my-2"
-      max-width="100"
-      @click="selectLeague(league.id)"
-    >
-      <v-img
-        aspect-ratio="1"
-        class="grey lighten-2 rounded-circle"
-        :src="`https://media.api-sports.io/football/leagues/${league.id}.png`"
-        width="100"
-      >
-      </v-img>
-          <v-card-title 
-          fluid
-          class="text-p mx-auto text--primary"
-          v-text="league.name"></v-card-title>
-    </v-sheet>
+  <v-container >
+      <v-row  class="d-flex justify-center">
+        <v-col cols="10" class="d-flex justify-center">
+          <v-card
+            color="primary"
+            dark
+            width="450px"
+            min-width="425"
+          >
+            <div 
+              class="d-flex flex-no-wrap justify-space-between"
+              
+              >
+              <div>
+                <v-card-title
+                  class="text-h5"
+                  v-text="league.name"
+                ></v-card-title>
+                <v-card-subtitle v-text="league.location"></v-card-subtitle>
+                <v-card-actions>
+                  <v-btn
+                    class="ml-2 mt-5"
+                    outlined
+                    rounded
+                    small
+                    @click="selectLeague(league.id)"
+                  >
+                    SEE MORE
+                  </v-btn>
+                </v-card-actions>
+              </div>
+              <v-avatar
+                class="ma-3"
+                size="125"
+                tile
+              >
+                <v-img 
+                contain 
+                :src="`https://media.api-sports.io/football/leagues/${league.id}.png`"
+                elevation="10"
+                @click="selectLeague(league.id)"
+                ></v-img>
+              </v-avatar>
+            </div>
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-container>
+
+
 </template>
 
 <script>
@@ -31,3 +64,10 @@ export default {
 }
 }
 </script>
+
+<style scoped>
+  .v-avatar:hover {
+    cursor: pointer;
+  }
+
+</style>

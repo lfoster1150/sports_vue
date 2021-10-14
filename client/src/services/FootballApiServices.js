@@ -25,3 +25,10 @@ export const GetLeaguesByCountryCode = async code => {
   //   throw error
   // }
 }
+
+export const GetTeamsByLeagueId = async leagueId => {
+  const res = await FootballClient.get(
+    `https://v3.football.api-sports.io/leagues?id=${leagueId}&&season=2021`
+  )
+  return res.data
+}
