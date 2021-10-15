@@ -21,13 +21,14 @@
         <v-img 
           contain 
           :src="`https://media.api-sports.io/football/teams/${team.id}.png`"
-          @click="selectTeam(team.id)"
+          
         ></v-img>
       </v-avatar>
       <v-row class="ma-2 d-flex  space-between">
         <v-btn 
         color="primary"
         icon
+        @click="selectTeam(team.id)"
         >
           <v-icon>mdi-information</v-icon>
         </v-btn>
@@ -35,6 +36,7 @@
         icon
         color="primary"
         v-if="authenticated && user"
+        @click="favoriteTeam(team)"
         >
           <v-icon>mdi-heart</v-icon>
         </v-btn>
@@ -54,8 +56,8 @@ export default {
     selectTeam(teamId) {
       this.$emit('selectTeam', teamId)
     },
-    favoriteTeam(teamId) {
-      this.$emit('favoriteTeam', teamId)
+    favoriteTeam(team) {
+      this.$emit('favoriteTeam', team)
     }
     },
   computed: {

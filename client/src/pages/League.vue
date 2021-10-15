@@ -13,6 +13,7 @@
 <script>
 import { mapState } from 'vuex'
 import { mapCacheActions } from 'vuex-cache';
+import {AddTeamToUser} from '../services/TeamServices'
 import TeamCard from '../components/TeamCard.vue'
 
 export default {
@@ -27,7 +28,7 @@ export default {
     ...mapState({
       user: state => state.user,
       authenticated: state => state.authenticated,
-      footballQueries: state => state.footballQueries,
+      userFavoriteTeams: state => state.userFavoriteTeams,
     })
   },
   methods: {
@@ -38,6 +39,16 @@ export default {
     },
     selectTeam(teamId) {
       console.log(teamId)
+    },
+    async favoriteTeam(team) {
+      const data = {
+        "name": team.name,
+        "image": `https://media.api-sports.io/football/teams/${team.id}.png`,
+        "api_id": team.id,
+        "user_id": this.user.id
+      }
+      const res = await AddTeamToUser(data)
+      console.log(res)
     }
   },
   async mounted() {

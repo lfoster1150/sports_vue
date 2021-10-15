@@ -17,6 +17,7 @@ class Teams(Resource):
             params[k] = data[k]
         team = Team(**params)
         team.create()
+
         return team.json(), 201
 
 
@@ -45,4 +46,8 @@ class TeamDetails(Resource):
 class TeamAPI(Resource):
     def get(self, api_id):
         team = Team.find_by_api_id(api_id)
-        return team.json()
+        print("XXXXXXXXXXXXXXXXXX", team)
+        if team:
+            return team.json()
+        else:
+            return team

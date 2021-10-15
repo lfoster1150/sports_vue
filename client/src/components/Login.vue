@@ -60,7 +60,7 @@ export default {
       ],
   }),
   methods: {
-    ...mapActions(['setUser']),
+    ...mapActions(['setUser','toggleAuthenticated']),
     validate () {
       if (this.$refs.form.validate()) {
         this.handleLogin()
@@ -70,14 +70,15 @@ export default {
       const payload = await SignInUser(this.existingUser)
       if (payload){
         this.setUser(payload)
+        this.toggleAuthenticated(true)
         this.loginFailed = false;
-        this.$router.push('/')
+      } else {
+        this.loginFailed = true;
       }
-      this.loginFailed = true;
     },
-    handeLogIn(user, isAuthenticated) {
-      this.$emit('handleLogIn', user, isAuthenticated)
-    },
+    // handeLogIn(user, isAuthenticated) {
+    //   this.$emit('handleLogIn', user, isAuthenticated)
+    // },
     registerPage() {
       this.$router.push('/register')
     },

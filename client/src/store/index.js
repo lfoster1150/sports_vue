@@ -9,21 +9,16 @@ Vue.use(Vuex)
 const state = {
   user: null,
   authenticated: false,
-  footballQueries: []
+  userFavoriteTeams: [],
+  userFavoritePlayers: []
 }
 
 const getters = {
   isAuthenticated() {
     return state.authenticated
   },
-  getFootballQueriesByCountry: state => id => {
-    return state.footballQueries.find(query => query.parameters.code === id)
-  },
-  getFootballQueriesByLeagueId: state => id => {
-    const query = state.footballQueries.find(
-      query => query.parameters.league === id
-    )
-    return query
+  userTeams() {
+    return state.userFavoriteTeams
   }
 }
 
@@ -34,11 +29,8 @@ const mutations = {
   toggleAuthenticated(state, authenticated) {
     state.authenticated = authenticated
   },
-  addQuery(state, query) {
-    state.footballQueries = query
-  },
-  setQuery(state, query) {
-    state.query = query
+  addTeamToUserFavorites(state, team) {
+    state.userFavoriteTeams.push(team)
   }
 }
 
@@ -49,9 +41,11 @@ const actions = {
   toggleAuthenticated(context, authenticated) {
     context.commit('toggleAuthenticated', authenticated)
   },
-  addQuery(context, query) {
-    context.commit('addQuery', query)
+  addTeamToUserFavorites(context, team) {
+    context.commit('addTeamToUserFavorites', team)
   },
+
+  // API ACTIONS
   FETCH_QUERY_BY_LEAGUE_ID: async (_, id) => {
     const res = await FootballClient.get(
       `${BASE_URL}/teams?league=${id}&&season=2021`
