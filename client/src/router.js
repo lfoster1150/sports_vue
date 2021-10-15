@@ -5,6 +5,7 @@ import Register from './pages/Register'
 import Country from './pages/Country'
 import League from './pages/League'
 import Team from './pages/Team'
+import User from './pages/User'
 
 // import store from './store/index'
 
@@ -13,7 +14,8 @@ const routes = [
   { path: '/register', component: Register, name: 'Register' },
   { path: '/country/:code', component: Country, name: 'Country' },
   { path: '/league/:league_id', component: League, name: 'League' },
-  { path: '/team/:team_id', component: Team, name: 'Team' }
+  { path: '/team/:team_id', component: Team, name: 'Team' },
+  { path: '/user/:user_id', component: User, name: 'User' }
 ]
 
 Vue.use(VueRouter)

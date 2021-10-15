@@ -9,7 +9,7 @@
     <div class="d-flex flex-column align-center">
       <div>
         <v-card-subtitle
-          v-text="player.name"
+          v-text="player.player.name"
           class="text-truncate"
         ></v-card-subtitle>
       </div>
@@ -21,7 +21,7 @@
         <v-img
           class="rounded-circle"
           contain 
-          :src="`https://media.api-sports.io/football/players/${player.id}.png`"
+          :src="`https://media.api-sports.io/football/players/${player.player.id}.png`"
           
         ></v-img>
       </v-avatar> 
@@ -29,7 +29,7 @@
         <v-btn 
         color="primary"
         icon
-        @click="selectPlayer(player.id)"
+        @click="selectPlayer(player.player.id)"
         >
           <v-icon>mdi-information</v-icon>
         </v-btn>
@@ -37,7 +37,7 @@
         icon
         color="primary"
         v-if="authenticated && user"
-        @click="favoritePlayer(player)"
+        @click="favoritePlayer(player.player)"
         >
           <v-icon>mdi-heart</v-icon>
         </v-btn>

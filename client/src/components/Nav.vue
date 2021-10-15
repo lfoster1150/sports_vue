@@ -25,7 +25,7 @@
           </v-btn>
       </template>
       <v-list>
-          <v-list-item v-if="authenticated && user" @click="goToUserPage(userId)">
+          <v-list-item v-if="authenticated && user" @click="goToUserPage(user.id)">
             <v-list-item-title>User Page</v-list-item-title>
           </v-list-item>
         <v-list-item v-if="!authenticated && !user" @click="signIn">
@@ -36,7 +36,6 @@
         </v-list-item>
       </v-list>
     </v-menu>
-
     </v-app-bar>
     <v-navigation-drawer
       v-model="drawer"

@@ -3,7 +3,7 @@
     <PlayerCard
       v-for="player in players"
       :key="player.player.id"
-      :player="player.player"
+      :player="player"
       @selectPlayer="selectPlayer"
       @favoritePlayer="favoritePlayer"
     />
@@ -50,7 +50,6 @@ export default {
         "user_id": this.user.id
       }
       const res = await AddPlayerToUser(data)
-      console.log(res)
       this.addPlayerToUserFavorites(res)
     }
   },
