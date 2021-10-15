@@ -2,6 +2,7 @@
   <v-app>
     <Nav />
     <v-main>
+      <h1 v-if="authenticated">Test</h1>
       <v-container fluid>
         <router-view></router-view>
       </v-container>
@@ -19,13 +20,17 @@ export default {
     Nav
   },
   mounted() {
-    const token = localStorage.getItem('token')
+    const token = this.getToken()
     if (token) {
       this.checkToken(token)
     }
   },
   methods: {
     ...mapActions(['setUser','toggleAuthenticated']),
+    async getToken() {
+      const token = await localStorage.getItem('token')
+      return token
+    },
     async checkToken(token) {
       const session = await CheckSession(token)
       this.setUser(session)

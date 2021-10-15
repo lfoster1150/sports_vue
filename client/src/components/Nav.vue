@@ -75,6 +75,10 @@ export default {
         this.drawer = false
       },
     },
+  computed: mapState({
+    user: state => state.user,
+    authenticated: state => state.authenticated
+  }),
   methods: {
     ...mapActions(['toggleAuthenticated','setUser']),
     goToUserPage(userId) {
@@ -89,10 +93,6 @@ export default {
       this.$router.push(`/`)
     }
   },
-  computed: mapState({
-    user: state => state.user,
-    authenticated: state => state.authenticated
-  }),
 }
 </script>
 

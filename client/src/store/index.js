@@ -4,8 +4,6 @@ import createCache from 'vuex-cache'
 import FootballClient from '../services/FootballApi'
 const BASE_URL = `https://v3.football.api-sports.io`
 
-Vue.use(Vuex)
-
 const state = {
   user: null,
   authenticated: false,
@@ -16,6 +14,9 @@ const state = {
 const getters = {
   isAuthenticated() {
     return state.authenticated
+  },
+  user() {
+    return state.user
   },
   userTeams() {
     return state.userFavoriteTeams
@@ -53,6 +54,8 @@ const actions = {
     return res.data.response
   }
 }
+
+Vue.use(Vuex)
 
 export default new Store({
   store: state,

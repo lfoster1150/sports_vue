@@ -18,7 +18,7 @@ export const DeleteUser = async userId => {
   }
 }
 
-export const GetUser = async userId => {
+export const GetUserFavorites = async userId => {
   try {
     const res = await Client.get(`/user/${userId}`)
     return res.data
@@ -26,3 +26,5 @@ export const GetUser = async userId => {
     throw error
   }
 }
+
+// /user/<int:user_id>
