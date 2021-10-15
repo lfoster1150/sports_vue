@@ -1,21 +1,21 @@
 <template>
   <v-card
   fluid
-    color="#1E1E1E"
+    color="#191919"
     dark
-    width="220px"
-    class="ma-2"
+    width="150px"
+    class="ma-2 pa-1"
   >
     <div class="d-flex flex-column align-center">
       <div>
-        <v-card-title
-          class="text-h6"
+        <v-card-subtitle
           v-text="player.name"
-        ></v-card-title>
+          class="text-truncate"
+        ></v-card-subtitle>
       </div>
       <v-avatar
-        class="ma-3"
-        size="125"
+        class="ma-.5"
+        size="100"
         tile
       >
         <v-img
@@ -37,7 +37,7 @@
         icon
         color="primary"
         v-if="authenticated && user"
-        @click="favoritePlayer(Player)"
+        @click="favoritePlayer(player)"
         >
           <v-icon>mdi-heart</v-icon>
         </v-btn>
@@ -71,5 +71,7 @@ export default {
 </script>
 
 <style scoped>
-
+  .rounded-circle{
+    border: 3px solid #04B88B;
+  }
 </style>

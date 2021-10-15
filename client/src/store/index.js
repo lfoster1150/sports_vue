@@ -42,7 +42,7 @@ const mutations = {
     state.userFavoriteTeams.push(team)
   },
   addPlayerToUserFavorites(state, player) {
-    state.userFavoriteTeams.push(player)
+    state.userFavoritePlayers.push(player)
   }
 }
 

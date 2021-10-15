@@ -45,4 +45,7 @@ class PlayerDetails(Resource):
 class PlayerAPI(Resource):
     def get(self, api_id):
         player = Player.find_by_api_id(api_id)
-        return player.json()
+        if player:
+            return player.json()
+        else:
+            return player

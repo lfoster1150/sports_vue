@@ -46,7 +46,6 @@ class TeamDetails(Resource):
 class TeamAPI(Resource):
     def get(self, api_id):
         team = Team.find_by_api_id(api_id)
-        print("XXXXXXXXXXXXXXXXXX", team)
         if team:
             return team.json()
         else:

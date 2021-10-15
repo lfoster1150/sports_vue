@@ -5,15 +5,15 @@
       :key="player.player.id"
       :player="player.player"
       @selectPlayer="selectPlayer"
-      @favoritePlayer="favoritPlayer"
+      @favoritePlayer="favoritePlayer"
     />
   </v-container>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 import { mapCacheActions } from 'vuex-cache';
-import {AddTeamToUser} from '../services/TeamServices'
+import { AddPlayerToUser } from '../services/PlayerServices'
 import PlayerCard from '../components/PlayerCard.vue'
 
 export default {
@@ -32,6 +32,7 @@ export default {
     })
   },
   methods: {
+    ...mapActions(['addPlayerToUserFavorites']),
     ...mapCacheActions(['FETCH_QUERY_BY_TEAM_ID']),
     async getTeamPlayers(teamId) {
       let results = await this.FETCH_QUERY_BY_TEAM_ID(teamId)
@@ -41,17 +42,17 @@ export default {
       console.log(playerId)
       //this.$router.push(`/player/${playerId}`)
     },
-    // async favoritePayer(player) {
-    //   const data = {
-    //     "name": team.name,
-    //     "image": `https://media.api-sports.io/football/teams/${team.id}.png`,
-    //     "api_id": team.id,
-    //     "user_id": this.user.id
-    //   }
-    //   const res = await AddTeamToUser(data)
-      
-    //   console.log(res)
-    // }
+    async favoritePlayer(player) {
+      const data = {
+        "name": player.name,
+        "image": `https://media.api-sports.io/football/players/${player.id}.png`,
+        "api_id": player.id,
+        "user_id": this.user.id
+      }
+      const res = await AddPlayerToUser(data)
+      console.log(res)
+      this.addPlayerToUserFavorites(res)
+    }
   },
   async mounted() {
     // getPLayers
