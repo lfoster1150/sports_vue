@@ -4,6 +4,8 @@ import createCache from 'vuex-cache'
 import FootballClient from '../services/FootballApi'
 const BASE_URL = `https://v3.football.api-sports.io`
 
+Vue.use(Vuex)
+
 const state = {
   user: null,
   authenticated: false,
@@ -45,7 +47,6 @@ const actions = {
   addTeamToUserFavorites(context, team) {
     context.commit('addTeamToUserFavorites', team)
   },
-
   // API ACTIONS
   FETCH_QUERY_BY_LEAGUE_ID: async (_, id) => {
     const res = await FootballClient.get(
@@ -55,10 +56,8 @@ const actions = {
   }
 }
 
-Vue.use(Vuex)
-
 export default new Store({
-  store: state,
+  state,
   plugins: [createCache()],
   mutations,
   actions,

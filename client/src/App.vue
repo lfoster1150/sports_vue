@@ -13,16 +13,16 @@
 <script>
 import Nav from './components/Nav.vue'
 import { CheckSession } from './services/Auth'
-import { mapActions, mapState } from 'vuex'
+import { mapActions, mapState, mapGetters } from 'vuex'
 export default {
   name: 'App',
   components: {
     Nav
   },
-  mounted() {
-    const token = this.getToken()
+  async mounted() {
+    const token = await this.getToken()
     if (token) {
-      this.checkToken(token)
+      await this.checkToken(token)
     }
   },
   methods: {
@@ -37,10 +37,10 @@ export default {
       this.toggleAuthenticated(true)
     }
   },
-  computed: mapState({
-    user: state => state.user,
-    authenticated: state => state.authenticated
-  }),
+  computed: {
+    ...mapState(["user", "authenticated"])
+  }
+  
   
 };
 </script>

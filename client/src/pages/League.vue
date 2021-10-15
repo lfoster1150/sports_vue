@@ -48,6 +48,7 @@ export default {
         "user_id": this.user.id
       }
       const res = await AddTeamToUser(data)
+      
       console.log(res)
     }
   },
