@@ -1,12 +1,12 @@
 <template>
   <v-container fluid class="d-flex flex-row flex-wrap justify-space-around">
-    <!-- <PlayerCard
+    <PlayerCard
       v-for="player in players"
       :key="player.player.id"
-      :team="player.player"
+      :player="player.player"
       @selectPlayer="selectPlayer"
       @favoritePlayer="favoritPlayer"
-    /> -->
+    />
   </v-container>
 </template>
 
@@ -14,7 +14,7 @@
 import { mapState } from 'vuex'
 import { mapCacheActions } from 'vuex-cache';
 import {AddTeamToUser} from '../services/TeamServices'
-// import PlayerCard from '../components/PlayerCard.vue'
+import PlayerCard from '../components/PlayerCard.vue'
 
 export default {
   name: 'Team',
@@ -22,7 +22,7 @@ export default {
     players: null
   }),
   components: {
-    // TeamCard
+    PlayerCard
   },
   computed: {
     ...mapState({

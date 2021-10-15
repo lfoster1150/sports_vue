@@ -2,7 +2,6 @@
   <v-app>
     <Nav />
     <v-main>
-      <h1 v-if="authenticated">Test</h1>
       <v-container fluid>
         <router-view></router-view>
       </v-container>
