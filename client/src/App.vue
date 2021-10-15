@@ -13,6 +13,7 @@
 <script>
 import Nav from './components/Nav.vue'
 import { CheckSession } from './services/Auth'
+import {GetUserFavorites} from './services/UserServices'
 import { mapActions, mapState, mapGetters } from 'vuex'
 export default {
   name: 'App',
@@ -23,10 +24,17 @@ export default {
     const token = await this.getToken()
     if (token) {
       await this.checkToken(token)
+      const favorites = await GetUserFavorites(this.user.id)
+      if(favorites.players.length) {
+        this.setUserTeams(favorites.players)
+      }
+      if(favorites.teams.length) {
+        this.setUserTeams(favorites.teams)
+      } 
     }
   },
   methods: {
-    ...mapActions(['setUser','toggleAuthenticated']),
+    ...mapActions(['setUser','toggleAuthenticated','setUserTeams','setUserTeams']),
     async getToken() {
       const token = await localStorage.getItem('token')
       return token
@@ -40,8 +48,6 @@ export default {
   computed: {
     ...mapState(["user", "authenticated"])
   }
-  
-  
 };
 </script>
 

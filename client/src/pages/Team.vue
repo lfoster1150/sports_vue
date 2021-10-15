@@ -1,28 +1,28 @@
 <template>
   <v-container fluid class="d-flex flex-row flex-wrap justify-space-around">
-    <TeamCard
+    <!-- <TeamCard
       v-for="team in teams"
       :key="team.team.id"
       :team="team.team"
       @selectTeam="selectTeam"
       @favoriteTeam="favoriteTeam"
-    />
+    /> -->
   </v-container>
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState } from 'vuex'
 import { mapCacheActions } from 'vuex-cache';
 import {AddTeamToUser} from '../services/TeamServices'
-import TeamCard from '../components/TeamCard.vue'
+// import TeamCard from '../components/TeamCard.vue'
 
 export default {
-  name: 'League',
+  name: 'Team',
   data: () => ({
-    teams: null
+    players: null
   }),
   components: {
-    TeamCard
+    // TeamCard
   },
   computed: {
     ...mapState({
@@ -32,14 +32,13 @@ export default {
     })
   },
   methods: {
-    ...mapActions(['addTeamToUserFavorites']),
     ...mapCacheActions(['FETCH_QUERY_BY_LEAGUE_ID']),
     async getLeagueTeams(leagueId) {
       let results = await this.FETCH_QUERY_BY_LEAGUE_ID(leagueId)
       this.teams = results
     },
     selectTeam(teamId) {
-      console.log(teamId)
+      this.$router.push(`/team/${teamId}`)
     },
     async favoriteTeam(team) {
       const data = {
@@ -49,7 +48,8 @@ export default {
         "user_id": this.user.id
       }
       const res = await AddTeamToUser(data)
-      this.addTeamToUserFavorites(res)
+      
+      console.log(res)
     }
   },
   async mounted() {

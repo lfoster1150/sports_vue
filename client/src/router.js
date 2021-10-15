@@ -4,13 +4,16 @@ import Home from './pages/Home'
 import Register from './pages/Register'
 import Country from './pages/Country'
 import League from './pages/League'
+import Team from './pages/Team'
+
 // import store from './store/index'
 
 const routes = [
   { path: '/', component: Home, name: 'Home' },
   { path: '/register', component: Register, name: 'Register' },
   { path: '/country/:code', component: Country, name: 'Country' },
-  { path: '/league/:league_id', component: League, name: 'League' }
+  { path: '/league/:league_id', component: League, name: 'League' },
+  { path: '/team/:team_id', component: Team, name: 'Team' }
 ]
 
 Vue.use(VueRouter)

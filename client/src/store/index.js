@@ -32,8 +32,17 @@ const mutations = {
   toggleAuthenticated(state, authenticated) {
     state.authenticated = authenticated
   },
+  setUserTeams(context, teams) {
+    state.userFavoriteTeams = teams
+  },
+  setUserPlayers(context, players) {
+    state.userFavoritePlayers = players
+  },
   addTeamToUserFavorites(state, team) {
     state.userFavoriteTeams.push(team)
+  },
+  addPlayerToUserFavorites(state, player) {
+    state.userFavoriteTeams.push(player)
   }
 }
 
@@ -44,8 +53,17 @@ const actions = {
   toggleAuthenticated(context, authenticated) {
     context.commit('toggleAuthenticated', authenticated)
   },
+  setUserTeams(context, teams) {
+    context.commit('setUserTeams', teams)
+  },
+  setUserPlayers(context, players) {
+    context.commit('setUserPlayers', players)
+  },
   addTeamToUserFavorites(context, team) {
     context.commit('addTeamToUserFavorites', team)
+  },
+  addPlayerToUserFavorites(context, player) {
+    context.commit('addPlayerToUserFavorites', player)
   },
   // API ACTIONS
   FETCH_QUERY_BY_LEAGUE_ID: async (_, id) => {
