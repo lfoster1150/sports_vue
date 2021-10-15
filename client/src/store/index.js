@@ -71,6 +71,28 @@ const actions = {
       `${BASE_URL}/teams?league=${id}&&season=2021`
     )
     return res.data.response
+  },
+
+  FETCH_QUERY_BY_TEAM_ID: async (_, id) => {
+    let finalResult = null
+    const res = await FootballClient.get(
+      `${BASE_URL}/players?season=2021&team=${id}&season=2021`
+    )
+    finalResult = res.data.response
+    if (res.data.paging.total > 1) {
+      for (let i = 2; i <= res.data.paging.total; i++) {
+        const nextPageRes = await FootballClient.get(
+          `${BASE_URL}/players?season=2021&team=${id}&season=2021&page=${i}`
+        )
+        finalResult.push(...nextPageRes.data.response)
+      }
+    }
+    finalResult = finalResult.sort((a, b) => {
+      const aAppears = a.statistics[0].games.appearences
+      const bAppears = b.statistics[0].games.appearences
+      return bAppears - aAppears
+    })
+    return finalResult
   }
 }
 

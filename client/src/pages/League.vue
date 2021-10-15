@@ -39,7 +39,7 @@ export default {
       this.teams = results
     },
     selectTeam(teamId) {
-      console.log(teamId)
+      this.$router.push(`/team/${teamId}`)
     },
     async favoriteTeam(team) {
       const data = {
