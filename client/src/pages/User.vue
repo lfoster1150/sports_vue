@@ -1,4 +1,17 @@
 <template>
+<v-container>
+  <template>
+    <v-expansion-panels popout="true" hover="true">
+      <v-expansion-panel >
+        <v-expansion-panel-header  expand-icon="mdi-account-edit" disable-icon-rotate>
+          Edit User Info
+        </v-expansion-panel-header>
+        <v-expansion-panel-content >
+          <EditUser />
+        </v-expansion-panel-content>
+      </v-expansion-panel>
+    </v-expansion-panels>
+  </template>
   <v-container fluid class="d-flex flex-row flex-wrap justify-space-around">
     <!-- <PlayerCard
       v-for="player in players"
@@ -8,10 +21,12 @@
       @favoritePlayer="favoritePlayer"
     /> -->
   </v-container>
+</v-container>
 </template>
 
 <script>
 import { mapState, mapActions } from 'vuex'
+import EditUser from '../components/EditUser.vue'
 // import { RemovePlayerFromUser } from '../services/PlayerServices'
 // import { RemoveTeamFromUser } from '../services/TeamServices'
 // import FavoritePlayerCard from '../components/FavoritePlayerCard.vue'
@@ -20,9 +35,10 @@ import { mapState, mapActions } from 'vuex'
 export default {
   name: 'User',
   data: () => ({
-    players: null
+    extend: false
   }),
   components: {
+    EditUser,
     // FavoritePlayerCard,
     // FavoriteTeamCard
   },
@@ -60,3 +76,12 @@ export default {
 
 }
 </script>
+
+<style scoped>
+/* .v-expansion-panels {
+  width: 300px;
+} */
+/* .v-expansion-panel--active  {
+  width: 100%;
+} */
+</style>
