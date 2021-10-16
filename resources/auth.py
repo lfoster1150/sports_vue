@@ -60,13 +60,3 @@ class UpdatePassword(Resource):
             return {"msg": "Incorrect Credentials"}, 404
         except:
             return {"msg": "Error"}, 404
-
-
-class Delete(Resource):
-    def delete(self, user_id):
-        user = User.find_by_id(user_id)
-        if not user:
-            return {"msg": "User not found"}, 404
-        db.session.delete(user)
-        db.session.commit()
-        return {"msg": "User Deleted", "payload": user.json()}

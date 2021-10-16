@@ -28,9 +28,6 @@
           </v-btn>
       </v-form>
     </template>
-
-
-
     <!-- UPDATE USER PASSWORD -->
     <template>
       <v-form
@@ -60,14 +57,22 @@
           Update Password
         </v-btn>
       </v-form>
-      
     </template>
+  <v-container class="d-flex justify-end align-center ma-0 pa-0">
+      <h4 v-if="isDeleteReject" class="mx-5" color="red">User Not Deleted</h4>
+      <v-btn
+          color="red"
+          @click="deleteUser"
+        >
+          Delete User
+      </v-btn>
+  </v-container>
   </v-container>
 </template>
 
 <script>
 import {UpdateUserPassword} from '../services/Auth'
-import {UpdateUser} from '../services/UserServices'
+import {UpdateUser, DeleteUser} from '../services/UserServices'
 import { mapActions, mapState } from 'vuex'
 export default {
   name: "EditUser",
@@ -78,6 +83,7 @@ export default {
       isInfoReject: false,
       isPassChanged: false,
       isPassReject: false,
+      isDeleteReject: false,
       validInfo: true,
       updatePassword: {
         oldPassword: '',
@@ -118,6 +124,15 @@ export default {
       resetValidation () {
         this.$refs.form.resetValidation()
       },
+      async deleteUser () {
+        console.log('delete')
+        const res = await DeleteUser(this.user.id)
+        if(res) {
+          this.$router.push(`/`)
+        } else {
+          this.isDeleteReject = true
+        }
+      }, 
     },
     computed: mapState({
       user: state => state.user,

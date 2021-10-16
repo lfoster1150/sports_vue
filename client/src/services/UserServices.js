@@ -11,7 +11,8 @@ export const UpdateUser = async (userId, data) => {
 
 export const DeleteUser = async userId => {
   try {
-    const res = await Client.delete(`/user/delete/${userId}`)
+    const res = await Client.delete(`/user/${userId}`)
+    localStorage.removeItem('token')
     return res.data
   } catch (error) {
     console.log(error)

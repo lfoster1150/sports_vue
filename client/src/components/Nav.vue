@@ -84,6 +84,7 @@ export default {
       this.$router.push(`/user/${userId}`)
     },
     signOut() {
+      localStorage.removeItem('token')
       this.setUser(null)
       this.toggleAuthenticated(false)
       this.$router.push(`/`)
