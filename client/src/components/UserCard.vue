@@ -36,6 +36,7 @@
               @click="selectItem(item.api_id)"
             >Go To Page</v-btn>
             <v-btn
+            v-if="page === 'User'"
               @click="removeItem(item)"
             >Remove</v-btn>
           </v-container>
@@ -50,7 +51,7 @@
 import { mapState } from 'vuex'
 export default {
   name: 'UserCard',
-  props: ['item', 'cardType'],
+  props: ['item', 'page'],
   methods: {
     data: () => ({
       overlay: false,

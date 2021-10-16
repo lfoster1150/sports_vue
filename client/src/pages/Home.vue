@@ -3,6 +3,36 @@
   <v-container v-if="!authenticated && !user" class="login-container">
     <Login />
   </v-container>
+  <v-container v-if="authenticated && user" class="d-flex flex-row flex-wrap justify-space-around container-color rounded-lg" elevation="20">
+  <v-container v-if="userFavoriteTeams.length">
+    <div class="text-h5 mb-0 text-center">
+      Favorites
+    </div>
+  </v-container>
+  <v-container v-if="userFavoriteTeams.length" fluid class="d-flex flex-row flex-wrap justify-space-around">
+    <UserCard
+      v-for="team in userFavoriteTeams"
+      :key="team.id"
+      :page="page"
+      :item="team"
+      @selectItem="selectTeam"
+    />
+  </v-container>
+    <v-container v-if="userFavoritePlayers.length">
+    <div class="text-h5 mb-0 text-center">
+      Your Players
+    </div>
+  </v-container>
+  <v-container v-if="userFavoritePlayers.length" fluid class="d-flex flex-row flex-wrap justify-space-around">
+    <UserCard
+      v-for="player in userFavoritePlayers"
+      :key="player.id"
+      :page="page"
+      :item="player"
+      @selectItem="selectPlayer"
+    />
+  </v-container>
+  </v-container>
   <v-container>
     <p class="text-h5 text--primary">
       Top Leagues:
@@ -14,9 +44,6 @@
         @selectLeague="selectLeague"
       />
   </v-container>
-  <v-container fluid class="d-flex .flex-row flex-wrap">
-
-  </v-container>
 </v-container>
   
 </template>
@@ -25,6 +52,7 @@
 import Login from '../components/Login.vue'
 import { mapState } from 'vuex'
 import LeagueCard from '../components/LeagueCard.vue'
+import UserCard from '../components/UserCard.vue'
 export default {
   name: 'Home',
   data: () => ({
@@ -44,17 +72,30 @@ export default {
   }),
   components: {
     Login,
-    LeagueCard
+    LeagueCard,
+    UserCard
   },
   computed: mapState({
     user: state => state.user,
-    authenticated: state => state.authenticated
+    authenticated: state => state.authenticated,
+    userFavoriteTeams: state => state.userFavoriteTeams,
+    userFavoritePlayers: state => state.userFavoritePlayers,
   }),
   methods: {
     async selectLeague(leagueId) {
       this.$router.push(`/league/${leagueId}`)
+    },
+    async selectTeam(teamId) {
+      this.$router.push(`/team/${teamId}`)
+    },
+    async selectPlayer(playerId) {
+      this.$router.push(`/player/${playerId}`)
     }
+  },
+  mounted() {
+    this.page=this.$router.history.current.name
   }
+
 }
 </script>
 
@@ -64,5 +105,11 @@ export default {
     border-radius: 10px;
     padding: 1.5em;
   }
-  
+  .container-color {
+    background-color: #1E1E1E;
+    border: 2px solid #04B88B;
+  }
+  .container .container-color {
+    padding: 0;
+  }
 </style>

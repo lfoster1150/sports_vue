@@ -21,6 +21,7 @@
     <UserCard
       v-for="team in userFavoriteTeams"
       :key="team.id"
+      :page="page"
       :item="team"
       @selectItem="selectTeam"
       @removeItem="removeTeam"
@@ -35,6 +36,7 @@
     <UserCard
       v-for="player in userFavoritePlayers"
       :key="player.id"
+      :page="page"
       :item="player"
       @selectItem="selectPlayer"
       @removeItem="removePlayer"
@@ -53,7 +55,8 @@ import { RemoveTeamFromUser } from '../services/TeamServices'
 export default {
   name: 'User',
   data: () => ({
-    extend: false
+    extend: false,
+    page: ''
   }),
   components: {
     EditUser,
@@ -92,7 +95,8 @@ export default {
       this.removePlayerFromUserFavorites(res.player_id)
     }
   },
-  async mounted() {
+  mounted() {
+    this.page=this.$router.history.current.name
   }
 
 }
@@ -106,5 +110,4 @@ export default {
   .container .container-color {
     padding: none;
   }
-
 </style>
