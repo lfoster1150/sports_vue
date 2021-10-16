@@ -4,7 +4,7 @@ from flask_cors import CORS
 from flask_migrate import Migrate
 from models.db import db
 from resources.user import UserTeams, UserTeamsById, UserById, UserPlayers
-from resources.auth import Delete, Login, Register, Session, Update
+from resources.auth import Delete, Login, Register, Session, UpdatePassword
 from resources.team import Teams, TeamDetails, TeamAPI
 from resources.player import Players, PlayerDetails, PlayerAPI
 from models.user import User
@@ -30,7 +30,7 @@ migrate = Migrate(app, db)
 api.add_resource(Login, '/api/auth/login')
 api.add_resource(Register, '/api/auth/register')
 api.add_resource(Session, '/api/auth/session')
-api.add_resource(Update, '/api/user/update/<int:user_id>')
+api.add_resource(UpdatePassword, '/api/auth/user/<int:user_id>')
 api.add_resource(Delete, '/api/user/delete/<int:user_id>')
 api.add_resource(UserTeams, '/api/user/teams')
 api.add_resource(UserPlayers, '/api/user/players')

@@ -21,6 +21,15 @@ class UserById(Resource):
             "players": players
         }
 
+    def put(self, user_id):
+        print("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
+        data = request.get_json()
+        user = User.find_by_id(user_id)
+        for key in data:
+            setattr(user, key, data[key])
+        db.session.commit()
+        return user.json()
+
 
 class UserTeamsById(Resource):
 

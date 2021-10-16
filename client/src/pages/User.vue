@@ -1,7 +1,7 @@
 <template>
 <v-container>
   <template>
-    <v-expansion-panels popout="true" hover="true">
+    <v-expansion-panels :popout="true" :hover="true">
       <v-expansion-panel >
         <v-expansion-panel-header  expand-icon="mdi-account-edit" disable-icon-rotate>
           Edit User Info

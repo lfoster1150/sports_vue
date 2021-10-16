@@ -1,11 +1,12 @@
 <template>
   <v-container>
     <!-- UPDATE USER INFO -->
-    <template>
+    <template >
       <v-form
         ref="form"
         v-model="validInfo"
         lazy-validation
+        class="my-1"
       >
         <v-text-field
           v-model="updateInfo.name"
@@ -16,10 +17,12 @@
           :rules="emailRules"
           label="Email"
         ></v-text-field>
+        <h4 v-if="isInfoChanged" color="green">Info Changed</h4>
+        <h4 v-if="isInfoReject" color="red">Info Not Changed</h4>
         <v-btn
           :disabled="!validInfo"
           color="success"
-          @click="validate"
+          @click="updateUserInfo"
         >
           Update Info
           </v-btn>
@@ -32,29 +35,27 @@
     <template>
       <v-form
         ref="form"
-        v-model="validPassword"
-        lazy-validation
       >
         <v-text-field
-          v-model="updatePassword.newPassword"
+          v-model="updatePassword.oldPassword"
           :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-          :rules="[value => !!value || 'Old Password is required']"
           :type="show1 ? 'text' : 'password'"
           label="Old Password"
           @click:append="show1 = !show1"
         ></v-text-field>
         <v-text-field
           v-model="updatePassword.newPassword"
-          :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-          :rules="[value => !!value || 'New Password is required']"
-          :type="show1 ? 'text' : 'password'"
+          :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
+          :type="show2 ? 'text' : 'password'"
           label="New Password"
-          @click:append="show1 = !show1"
+          @click:append="show2 = !show2"
         ></v-text-field>
+        <h4 v-if="isPassChanged" color="green">Password Changed</h4>
+        <h4 v-if="isPassReject" color="red">Password Not Changed</h4>
         <v-btn
-          :disabled="!validPassword"
+          :disabled="!updatePassword.oldPassword || !updatePassword.newPassword"
           color="success"
-          @click="validate"
+          @click="updateUserPassword"
         >
           Update Password
         </v-btn>
@@ -65,13 +66,18 @@
 </template>
 
 <script>
-import {RegisterUser} from '../services/Auth'
+import {UpdateUserPassword} from '../services/Auth'
+import {UpdateUser} from '../services/UserServices'
+import { mapActions, mapState } from 'vuex'
 export default {
-  name: "Register",
+  name: "EditUser",
   data: () => ({
       show1: false,
       show2: false,
-      validPassword: true,
+      isInfoChanged: false,
+      isInfoReject: false,
+      isPassChanged: false,
+      isPassReject: false,
       validInfo: true,
       updatePassword: {
         oldPassword: '',
@@ -88,12 +94,23 @@ export default {
     }),
 
     methods: {
-      validate () {
-        if (this.$refs.form.validate()) {
-          RegisterUser({...this.newUser})
-          this.newUser = {name: '',email: '',password: ''}
-          this.$router.push(`/`)
-        }
+      async updateUserPassword () {
+          const res = await UpdateUserPassword(this.user.id, {...this.updatePassword})
+          if(res) {
+            this.isPassChanged = true
+            this.updatePassword = {oldPassword: '',newPassword: ''}
+          } else {
+            this.isPassReject = true
+          }
+      },
+      async updateUserInfo () {
+          const res = await UpdateUser(this.user.id, {...this.updateInfo})
+          if(res) {
+            this.isInfoChanged = true
+            this.updateInfo = { name: '', email: ''}
+          } else {
+            this.isInfoReject = true
+          }
       },
       reset () {
         this.$refs.form.reset()
@@ -102,6 +119,10 @@ export default {
         this.$refs.form.resetValidation()
       },
     },
+    computed: mapState({
+      user: state => state.user,
+      authenticated: state => state.authenticated
+  }),
 }
 </script>
 
@@ -109,5 +130,8 @@ export default {
   .v-btn {
     margin-right: 1em;
     margin-top: 1em;
+  }
+  .v-form {
+    margin-top: 2em;
   }
 </style>

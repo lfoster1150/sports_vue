@@ -44,7 +44,8 @@ class Register(Resource):
         return user.json(), 201
 
 
-class Update(Resource):
+class UpdatePassword(Resource):
+
     def put(self, user_id):
         try:
             data = request.get_json()

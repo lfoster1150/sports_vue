@@ -31,3 +31,16 @@ export const CheckSession = async token => {
     console.log(error)
   }
 }
+
+export const UpdateUserPassword = async (userId, data) => {
+  try {
+    const passData = {
+      old_password: data.oldPassword,
+      new_password: data.newPassword
+    }
+    const res = await Client.put(`/auth/user/${userId}`, passData)
+    return res.data
+  } catch (error) {
+    console.log(error)
+  }
+}
