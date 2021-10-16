@@ -5,7 +5,7 @@ export const AddTeamToUser = async data => {
     const getTeam = await Client.get(`/teamapi/${data.api_id}`)
     if (getTeam.data) {
       const userTeam = await Client.post(`/user/teams`, {
-        user_id: data.user_id,
+        user_id: parseFloat(data.user_id),
         team_id: getTeam.data.id
       })
       return userTeam

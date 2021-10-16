@@ -4,8 +4,8 @@ export const AddPlayerToUser = async data => {
   try {
     const getPlayer = await Client.get(`/playerapi/${data.api_id}`)
     if (getPlayer.data) {
-      const userPlayer = await Client.post(`/user/player`, {
-        user_id: data.user_id,
+      const userPlayer = await Client.post(`/user/players`, {
+        user_id: parseFloat(data.user_id),
         player_id: getPlayer.data.id
       })
       return userPlayer

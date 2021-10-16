@@ -9,7 +9,7 @@
       Favorites
     </div>
   </v-container>
-  <v-container v-if="userFavoriteTeams.length" fluid class="d-flex flex-row flex-wrap justify-space-around">
+  <v-container v-if="userFavoriteTeams.length && page" fluid class="d-flex flex-row flex-wrap justify-space-around">
     <UserCard
       v-for="team in userFavoriteTeams"
       :key="team.id"
@@ -18,12 +18,7 @@
       @selectItem="selectTeam"
     />
   </v-container>
-    <v-container v-if="userFavoritePlayers.length">
-    <div class="text-h5 mb-0 text-center">
-      Your Players
-    </div>
-  </v-container>
-  <v-container v-if="userFavoritePlayers.length" fluid class="d-flex flex-row flex-wrap justify-space-around">
+  <v-container v-if="userFavoritePlayers.length  && page" fluid class="d-flex flex-row flex-wrap justify-space-around">
     <UserCard
       v-for="player in userFavoritePlayers"
       :key="player.id"
@@ -68,7 +63,8 @@ export default {
       {name: "Ligue 1", id: "61", location: "France"},
       {name: "Ligue 2", id: "62", location: "France"},
       {name: "Major League Soccer", id: "253", location: "United States"},
-    ]
+    ],
+    page: ''
   }),
   components: {
     Login,
@@ -93,7 +89,7 @@ export default {
     }
   },
   mounted() {
-    this.page=this.$router.history.current.name
+    this.page = this.$router.history.current.name
   }
 
 }
