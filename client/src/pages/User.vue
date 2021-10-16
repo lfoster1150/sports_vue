@@ -1,9 +1,9 @@
 <template>
 <v-container>
   <template>
-    <v-expansion-panels :popout="true" :hover="true">
+    <v-expansion-panels :popout="true" :hover="true" class="mb-5" >
       <v-expansion-panel >
-        <v-expansion-panel-header  expand-icon="mdi-account-edit" disable-icon-rotate>
+        <v-expansion-panel-header  expand-icon="mdi-account-edit" disable-icon-rotate >
           Edit User Info
         </v-expansion-panel-header>
         <v-expansion-panel-content >
@@ -12,14 +12,33 @@
       </v-expansion-panel>
     </v-expansion-panels>
   </template>
-  <v-container fluid class="d-flex flex-row flex-wrap justify-space-around">
-    <!-- <PlayerCard
-      v-for="player in players"
-      :key="player.player.id"
-      :player="player"
-      @selectPlayer="selectPlayer"
-      @favoritePlayer="favoritePlayer"
-    /> -->
+  <v-container v-if="userFavoriteTeams.length">
+    <div class="text-h5 mb-0 text-center">
+      Your Teams
+    </div>
+  </v-container>
+  <v-container v-if="userFavoriteTeams.length" fluid class="d-flex flex-row flex-wrap justify-space-around container-color rounded-lg" elevation="20">
+    <UserCard
+      v-for="team in userFavoriteTeams"
+      :key="team.id"
+      :item="team"
+      @selectItem="selectTeam"
+      @removeItem="removeTeam"
+    />
+  </v-container>
+    <v-container v-if="userFavoritePlayers.length">
+    <div class="text-h5 mb-0 text-center">
+      Your Players
+    </div>
+  </v-container>
+  <v-container v-if="userFavoritePlayers.length" fluid class="d-flex flex-row flex-wrap justify-space-around container-color rounded-lg" elevation="20">
+    <UserCard
+      v-for="player in userFavoritePlayers"
+      :key="player.id"
+      :item="player"
+      @selectItem="selectPlayer"
+      @removeItem="removePlayer"
+    />
   </v-container>
 </v-container>
 </template>
@@ -27,10 +46,9 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 import EditUser from '../components/EditUser.vue'
-// import { RemovePlayerFromUser } from '../services/PlayerServices'
-// import { RemoveTeamFromUser } from '../services/TeamServices'
-// import FavoritePlayerCard from '../components/FavoritePlayerCard.vue'
-// import FavoriteTeamCard from '../components/FavoriteTeamCard.vue'
+import UserCard from '../components/UserCard.vue'
+import { RemovePlayerFromUser } from '../services/PlayerServices'
+import { RemoveTeamFromUser } from '../services/TeamServices'
 
 export default {
   name: 'User',
@@ -39,8 +57,7 @@ export default {
   }),
   components: {
     EditUser,
-    // FavoritePlayerCard,
-    // FavoriteTeamCard
+    UserCard
   },
   computed: {
     ...mapState({
@@ -51,25 +68,29 @@ export default {
     })
   },
   methods: {
-    //...mapActions(['removeTeamFromUserFavorites','removePlayerFromUserFavorites']),
+    ...mapActions(['removeTeamFromUserFavorites','removePlayerFromUserFavorites']),
     selectTeam(teamId) {
-      console.log(teamId)
-      //this.$router.push(`/player/${playerId}`)
+      this.$router.push(`/team/${teamId}`)
     },
     selectPlayer(playerId) {
-      console.log(playerId)
-      //this.$router.push(`/player/${playerId}`)
+      this.$router.push(`/player/${playerId}`)
     },
-    // async removeFavoritePlayer(player) {
-    //   const data = {
-    //     "name": player.name,
-    //     "image": `https://media.api-sports.io/football/players/${player.id}.png`,
-    //     "api_id": player.id,
-    //     "user_id": this.user.id
-    //   }
-    //   const res = await RemovePlayerFromUser(data)
-    //   this.removePlayerFromUserFavorites(res)
-    // }
+    async removeTeam(team) {
+      const data = {
+        user_id: this.user.id,
+        team_id: team.id
+      }
+      const res = await RemoveTeamFromUser(data)
+      this.removeTeamFromUserFavorites(res.team_id)
+    },
+    async  removePlayer(player) {
+      const data = {
+        user_id: this.user.id,
+        player_id: player.id
+      }
+      const res = await RemovePlayerFromUser(data)
+      this.removePlayerFromUserFavorites(res.player_id)
+    }
   },
   async mounted() {
   }
@@ -78,10 +99,12 @@ export default {
 </script>
 
 <style scoped>
-/* .v-expansion-panels {
-  width: 300px;
-} */
-/* .v-expansion-panel--active  {
-  width: 100%;
-} */
+  .container-color {
+    background-color: #1E1E1E;
+    border: 2px solid #04B88B;
+  }
+  .container .container-color {
+    padding: none;
+  }
+
 </style>

@@ -26,6 +26,13 @@ export const AddTeamToUser = async data => {
   }
 }
 
-// team API /teamapi/<string:api_id>
-// teams
+export const RemoveTeamFromUser = async data => {
+  try {
+    const res = await Client.delete(`/user/teams`, { data: { ...data } })
+    return res.data
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 // /user/teams

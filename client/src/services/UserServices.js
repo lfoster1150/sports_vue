@@ -3,7 +3,6 @@ import Client from './api'
 export const UpdateUser = async (userId, data) => {
   try {
     const res = await Client.put(`/user/${userId}`, data)
-    console.log(res.data)
     return res.data
   } catch (error) {
     console.log(error)

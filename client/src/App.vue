@@ -25,7 +25,7 @@ export default {
       await this.checkToken(token)
       const favorites = await GetUserFavorites(this.user.id)
       if(favorites.players.length) {
-        this.setUserTeams(favorites.players)
+        this.setUserPlayers(favorites.players)
       }
       if(favorites.teams.length) {
         this.setUserTeams(favorites.teams)
@@ -33,7 +33,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['setUser','toggleAuthenticated','setUserTeams','setUserTeams']),
+    ...mapActions(['setUser','toggleAuthenticated','setUserTeams','setUserPlayers']),
     async getToken() {
       const token = await localStorage.getItem('token')
       return token

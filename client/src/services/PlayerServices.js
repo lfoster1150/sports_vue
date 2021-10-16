@@ -26,6 +26,15 @@ export const AddPlayerToUser = async data => {
   }
 }
 
+export const RemovePlayerFromUser = async data => {
+  try {
+    const res = await Client.delete(`/user/players`, { data: { ...data } })
+    return res.data
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 // team API /playerapi/<string:api_id>
 // players
 // /user/players

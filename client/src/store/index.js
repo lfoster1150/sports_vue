@@ -43,6 +43,16 @@ const mutations = {
   },
   addPlayerToUserFavorites(state, player) {
     state.userFavoritePlayers.push(player)
+  },
+  removeTeamFromUserFavorites(state, teamId) {
+    state.userFavoriteTeams = state.userFavoriteTeams.filter(
+      a => parseFloat(a.id) != parseFloat(teamId)
+    )
+  },
+  removePlayerFromUserFavorites(state, playerId) {
+    state.userFavoritePlayers = state.userFavoritePlayers.filter(
+      a => parseFloat(a.id) != parseFloat(playerId)
+    )
   }
 }
 
@@ -64,6 +74,12 @@ const actions = {
   },
   addPlayerToUserFavorites(context, player) {
     context.commit('addPlayerToUserFavorites', player)
+  },
+  removeTeamFromUserFavorites(context, teamId) {
+    context.commit('removeTeamFromUserFavorites', teamId)
+  },
+  removePlayerFromUserFavorites(context, playerId) {
+    context.commit('removePlayerFromUserFavorites', playerId)
   },
   // API ACTIONS
   FETCH_QUERY_BY_LEAGUE_ID: async (_, id) => {

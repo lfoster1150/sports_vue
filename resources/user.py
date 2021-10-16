@@ -22,7 +22,6 @@ class UserById(Resource):
         }
 
     def put(self, user_id):
-        print("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
         data = request.get_json()
         user = User.find_by_id(user_id)
         for key in data:
@@ -65,7 +64,7 @@ class UserTeams(Resource):
         team = Team.find_by_id(data["team_id"])
         user.user_teams.remove(team)
         db.session.commit()
-        return {"user": user.json()["email"], "payload": data}, 201
+        return data, 201
 
 
 class UserPlayers(Resource):
@@ -84,4 +83,4 @@ class UserPlayers(Resource):
         player = Player.find_by_id(data["player_id"])
         user.user_players.remove(player)
         db.session.commit()
-        return {"user": user.json()["email"], "payload": data}, 201
+        return data, 201
