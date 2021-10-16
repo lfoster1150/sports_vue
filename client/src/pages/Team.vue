@@ -19,7 +19,9 @@ import PlayerCard from '../components/PlayerCard.vue'
 export default {
   name: 'Team',
   data: () => ({
-    players: null
+    players: null,
+    team: null,
+    data: null
   }),
   components: {
     PlayerCard
@@ -35,6 +37,10 @@ export default {
     ...mapActions(['addPlayerToUserFavorites']),
     ...mapCacheActions(['FETCH_QUERY_BY_TEAM_ID']),
     async getTeamPlayers(teamId) {
+      let results = await this.FETCH_QUERY_BY_TEAM_ID(teamId)
+      this.players = results
+    },
+    async getTeamData(teamId) {
       let results = await this.FETCH_QUERY_BY_TEAM_ID(teamId)
       this.players = results
     },
@@ -54,7 +60,7 @@ export default {
     }
   },
   async mounted() {
-    // getPLayers
+
     this.getTeamPlayers(this.$route.params.team_id)
   }
 

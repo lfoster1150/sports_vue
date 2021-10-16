@@ -1,12 +1,13 @@
 <template>
-  <v-container >
+  <v-container  >
       <v-row  class="d-flex justify-center">
         <v-col cols="10" class="d-flex justify-center">
           <v-card
             color="primary"
             dark
-            width="450px"
+            width="425"
             min-width="425"
+            @click="selectLeague(league.id)"
           >
             <div 
               class="d-flex flex-no-wrap justify-space-between"
@@ -14,21 +15,10 @@
               >
               <div>
                 <v-card-title
-                  class="text-h5"
+                  class="text-h5 text-truncate"
                   v-text="league.name"
                 ></v-card-title>
                 <v-card-subtitle v-text="league.location"></v-card-subtitle>
-                <v-card-actions>
-                  <v-btn
-                    class="ml-2 mt-5"
-                    outlined
-                    rounded
-                    small
-                    @click="selectLeague(league.id)"
-                  >
-                    SEE MORE
-                  </v-btn>
-                </v-card-actions>
               </div>
               <v-avatar
                 class="ma-3"
