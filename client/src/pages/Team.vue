@@ -36,13 +36,10 @@ export default {
   methods: {
     ...mapActions(['addPlayerToUserFavorites']),
     ...mapCacheActions(['FETCH_QUERY_BY_TEAM_ID']),
-    async getTeamPlayers(teamId) {
+    async getTeamPlayersAndStats(teamId) {
       let results = await this.FETCH_QUERY_BY_TEAM_ID(teamId)
-      this.players = results
-    },
-    async getTeamData(teamId) {
-      let results = await this.FETCH_QUERY_BY_TEAM_ID(teamId)
-      this.players = results
+      this.players = results.players
+      this.data = results.data
     },
     selectPlayer(playerId) {
       console.log(playerId)
@@ -60,8 +57,7 @@ export default {
     }
   },
   async mounted() {
-
-    this.getTeamPlayers(this.$route.params.team_id)
+    this.getTeamPlayersAndStats(this.$route.params.team_id)
   }
 
 }

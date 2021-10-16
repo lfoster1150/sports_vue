@@ -91,14 +91,29 @@ const actions = {
 
   FETCH_QUERY_BY_TEAM_ID: async (_, id) => {
     let finalResult = null
+    let leagueId = 0
+    let league = await FootballClient.get(
+      `${BASE_URL}/leagues?season=2021&team=${id}`
+    )
+    league = league.data.response.filter(a => {
+      if (a.league.type === 'League') {
+        return a
+      }
+    })
+    if (league.length) {
+      leagueId = league[0].league.id
+    }
+    const data = await FootballClient.get(
+      `https://v3.football.api-sports.io/teams/statistics?league=${leagueId}&season=2021&team=${id}`
+    )
     const res = await FootballClient.get(
-      `${BASE_URL}/players?season=2021&team=${id}&season=2021`
+      `${BASE_URL}/players?season=2021&team=${id}`
     )
     finalResult = res.data.response
     if (res.data.paging.total > 1) {
       for (let i = 2; i <= res.data.paging.total; i++) {
         const nextPageRes = await FootballClient.get(
-          `${BASE_URL}/players?season=2021&team=${id}&season=2021&page=${i}`
+          `${BASE_URL}/players?season=2021&team=${id}&page=${i}`
         )
         finalResult.push(...nextPageRes.data.response)
       }
@@ -108,7 +123,10 @@ const actions = {
       const bAppears = b.statistics[0].games.appearences
       return bAppears - aAppears
     })
-    return finalResult
+    return {
+      players: finalResult,
+      data: data
+    }
   }
 }
 
