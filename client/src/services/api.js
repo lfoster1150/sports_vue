@@ -1,11 +1,14 @@
 import Axios from 'axios'
 
-// export const BASE_URL = 'http://localhost:5000/api'
+export const BASE_URL =
+  process.env.NODE_ENV === 'production'
+    ? `${process.env.VUE_APP_API_URL}/api`
+    : 'http://localhost:5000/api'
 
 const Client = Axios.create({
   baseURL:
     process.env.NODE_ENV === 'production'
-      ? process.env.VUE_APP_API_URL
+      ? `${process.env.VUE_APP_API_URL}/api`
       : 'http://localhost:5000/api'
 })
 
