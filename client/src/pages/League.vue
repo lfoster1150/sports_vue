@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid class="d-flex flex-row flex-wrap justify-space-around">
+  <v-container v-if="teams" fluid class="d-flex flex-row flex-wrap justify-space-around">
     <TeamCard
       v-for="team in teams"
       :key="team.team.id"

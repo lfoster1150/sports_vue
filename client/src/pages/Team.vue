@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid >
+  <v-container v-if="data" fluid >
       <v-row class="d-flex justify-center align-center" elevation="10">
           <v-card
             color="primary"
@@ -34,6 +34,7 @@
       </v-row>
       <v-row class="d-flex justify-center align-center mb-10" elevation="5" >
         <v-card
+          color="#eee"
           fluid
           width="80%"
           min-width="450">
@@ -81,7 +82,6 @@ export default {
   name: 'Team',
   data: () => ({
     players: null,
-    team: null,
     data: null,
     goalRadarData: {
       labels: [],
@@ -150,7 +150,7 @@ export default {
         "user_id": this.user.id
       }
       const res = await AddPlayerToUser(data)
-      this.addPlayerToUserFavorites(res.data)
+      this.addPlayerToUserFavorites(res.data.payload)
     }
   },
   async mounted() {
