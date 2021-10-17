@@ -6,7 +6,7 @@
     width="150px"
     class="ma-2 pa-1"
   >
-    <div class="d-flex flex-column align-center">
+    <div class="d-flex flex-column align-center ">
       <div>
         <v-card-subtitle
           v-text="player.player.name"
@@ -50,9 +50,7 @@
 import { mapState } from 'vuex'
 export default {
   name: 'PlayerCard',
-  props: {
-    player: {}
-  },
+  props: ["player", "teamLogo"],
   methods: {
     selectPlayer(playerId) {
       this.$emit('selectPlayer', playerId)

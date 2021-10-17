@@ -1,12 +1,51 @@
 <template>
-  <v-container fluid class="d-flex flex-row flex-wrap justify-space-around">
-    <PlayerCard
-      v-for="player in players"
-      :key="player.player.id"
-      :player="player"
-      @selectPlayer="selectPlayer"
-      @favoritePlayer="favoritePlayer"
-    />
+  <v-container fluid >
+    <v-container fluid >
+      <v-row class="d-flex justify-center align-center " >
+          <v-card
+            color="primary"
+            dark
+            width="80%"
+            min-width="300"
+          >
+            <div 
+              class="d-flex flex-no-wrap justify-space-between align-center mx-5"
+              >
+              <div>
+                <v-card-title
+                  class="text-h5 text-truncate"
+                  v-text="data.team.name"
+                ></v-card-title>
+                <v-card-subtitle v-text="data.league.name"></v-card-subtitle>
+              </div>
+              <v-spacer></v-spacer>
+              <v-avatar
+                class="ma-3"
+                size="100"
+                tile
+              >
+                <v-img 
+                contain 
+                :src="data.team.logo"
+                elevation="10"
+                ></v-img>
+              </v-avatar>
+            </div>
+          </v-card>
+      </v-row>
+    </v-container>
+
+
+    <v-container fluid class="d-flex flex-row flex-wrap justify-space-around">
+      <PlayerCard
+        v-for="player in players"
+        :key="player.player.id"
+        :player="player"
+        :teamLogo="data.team.logo"
+        @selectPlayer="selectPlayer"
+        @favoritePlayer="favoritePlayer"
+      />
+    </v-container>
   </v-container>
 </template>
 
@@ -39,7 +78,7 @@ export default {
     async getTeamPlayersAndStats(teamId) {
       let results = await this.FETCH_QUERY_BY_TEAM_ID(teamId)
       this.players = results.players
-      this.data = results.data
+      this.data = results.data.data.response
     },
     selectPlayer(playerId) {
       console.log(playerId)
@@ -62,3 +101,9 @@ export default {
 
 }
 </script>
+
+<style scoped>
+  .team {
+    height: 100px;
+  }
+</style>

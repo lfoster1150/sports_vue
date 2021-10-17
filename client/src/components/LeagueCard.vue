@@ -8,6 +8,7 @@
             width="425"
             min-width="425"
             @click="selectLeague(league.id)"
+            hover
           >
             <div 
               class="d-flex flex-no-wrap justify-space-between"
@@ -37,8 +38,6 @@
         </v-col>
       </v-row>
     </v-container>
-
-
 </template>
 
 <script>
