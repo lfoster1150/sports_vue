@@ -22,7 +22,7 @@ CORS(app)
 api = Api(app)
 
 DATABASE_URL = os.getenv('DATABASE_URL')
-os.getenv('APP_SECRET')
+
 if DATABASE_URL:
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL.replace(
