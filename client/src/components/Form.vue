@@ -3,6 +3,9 @@
     align="center"
     justify="center"
   >
+  <div class="text-h5 mb-0 px-5 text-truncate">
+    Current Form:
+  </div>
   <div
     v-for="(form,i) in formArray"
     :key="i"

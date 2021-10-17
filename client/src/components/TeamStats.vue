@@ -3,10 +3,10 @@
 
   <template>
     <v-row justify="center">
-      <v-expansion-panels accordion>
+      <v-expansion-panels accordion >
         <v-expansion-panel>
-          <v-expansion-panel-header>Fixture Stats</v-expansion-panel-header>
-          <v-expansion-panel-content v-if="data">
+          <v-expansion-panel-header color="primary">Fixture Stats</v-expansion-panel-header>
+          <v-expansion-panel-content v-if="data" color="primary">
             <TeamTable 
               :items="fixturesData"
               :headers="fixturesHeaders"

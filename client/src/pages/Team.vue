@@ -1,12 +1,11 @@
 <template>
   <v-container fluid >
-    <v-container fluid >
-      <v-row class="d-flex justify-center align-center " >
+      <v-row class="d-flex justify-center align-center" elevation="10">
           <v-card
             color="primary"
             dark
             width="80%"
-            min-width="300"
+            min-width="450"
           >
             <div 
               class="d-flex flex-no-wrap justify-space-between align-center mx-5"
@@ -33,27 +32,39 @@
             </div>
           </v-card>
       </v-row>
-    </v-container>
-    <v-container fluid >
-      <Form 
-        :form="data.form"
-      />
-      <GoalsChart
-        v-if="loadCharts"
-        :data="goalRadarData"
-      />
-    </v-container>
-    <v-container fluid class="d-flex flex-row flex-wrap justify-space-around">
-      <PlayerCard
-        v-for="player in players"
-        :key="player.player.id"
-        :player="player"
-        :teamLogo="data.team.logo"
-        @selectPlayer="selectPlayer"
-        @favoritePlayer="favoritePlayer"
-      />
-      <TeamStats :data="data" />
-    </v-container>
+      <v-row class="d-flex justify-center align-center mb-10" elevation="5" >
+        <v-card
+          fluid
+          width="80%"
+          min-width="450">
+        <v-container fluid >
+          <v-row class="d-flex justify-center align-center py-10" >
+            <Form 
+              :form="data.form"
+            />
+          </v-row>
+          <v-row class="d-flex justify-center align-center " >
+            <GoalsChart
+              v-if="loadCharts"
+              :data="goalRadarData"
+            />
+          </v-row>
+          <v-row class="d-flex justify-center align-center " >
+            <TeamStats :data="data" />
+          </v-row>
+        </v-container>
+      </v-card>
+      </v-row>
+      <v-container fluid class="d-flex flex-row flex-wrap justify-space-around">
+        <PlayerCard
+          v-for="player in players"
+          :key="player.player.id"
+          :player="player"
+          :teamLogo="data.team.logo"
+          @selectPlayer="selectPlayer"
+          @favoritePlayer="favoritePlayer"
+        />
+      </v-container>
   </v-container>
 </template>
 
