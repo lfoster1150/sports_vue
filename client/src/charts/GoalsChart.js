@@ -1,31 +1,44 @@
 // CommitChart.js
-import { Doughnut } from 'vue-chartjs'
+import { Radar } from 'vue-chartjs'
 
 export default {
-  extends: Doughnut,
+  extends: Radar,
+  data: () => ({
+    options: {
+      responsive: true,
+      maintainAspectRatio: false
+    }
+  }),
+  props: ['data'],
   mounted() {
     // Overwriting base render method with actual data.
-    this.renderChart({
-      labels: [
-        'January',
-        'February',
-        'March',
-        'April',
-        'May',
-        'June',
-        'July',
-        'August',
-        'September',
-        'October',
-        'November',
-        'December'
-      ],
-      datasets: [
-        {
-          label: 'GitHub Commits',
-          data: [40, 20, 12, 39, 10, 40, 39, 80, 40, 20, 12, 11]
-        }
-      ]
-    })
+    this.renderChart(
+      {
+        labels: this.data.labels,
+        datasets: [
+          {
+            label: 'Team Goals',
+            backgroundColor: 'rgba(179,181,198,0.2)',
+            borderColor: 'rgba(179,181,198,1)',
+            pointBackgroundColor: 'rgba(179,181,198,1)',
+            pointBorderColor: '#fff',
+            pointHoverBackgroundColor: '#fff',
+            pointHoverBorderColor: 'rgba(179,181,198,1)',
+            data: this.data.goalDataTeam
+          },
+          {
+            label: 'Opponent Goals',
+            backgroundColor: 'rgba(255,99,132,0.2)',
+            borderColor: 'rgba(255,99,132,1)',
+            pointBackgroundColor: 'rgba(255,99,132,1)',
+            pointBorderColor: '#fff',
+            pointHoverBackgroundColor: '#fff',
+            pointHoverBorderColor: 'rgba(255,99,132,1)',
+            data: this.data.goalDataOpp
+          }
+        ]
+      },
+      this.options
+    )
   }
 }

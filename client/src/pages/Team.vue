@@ -38,7 +38,10 @@
       <Form 
         :form="data.form"
       />
-      <GoalsChart />
+      <GoalsChart
+        v-if="loadCharts"
+        :data="goalRadarData"
+      />
     </v-container>
     <v-container fluid class="d-flex flex-row flex-wrap justify-space-around">
       <PlayerCard
@@ -66,7 +69,13 @@ export default {
   data: () => ({
     players: null,
     team: null,
-    data: null
+    data: null,
+    goalRadarData: {
+      labels: [],
+      goalDataTeam: [],
+      goalDataOpp: [],
+    },
+    loadCharts: false
   }),
   components: {
     PlayerCard,
@@ -87,6 +96,30 @@ export default {
       let results = await this.FETCH_QUERY_BY_TEAM_ID(teamId)
       this.players = results.players
       this.data = results.data.data.response
+      this.setGoalsChartData()
+    },
+    setGoalsChartData() {
+      let formattedLabels = Object.keys(this.data.goals.for.minute)
+      this.goalRadarData.labels = formattedLabels.map(label => label +=" Minutes")
+      for (const time in this.data.goals.for.minute) {
+        const total = this.data.goals.for.minute[time].total
+        if (!total) {
+          this.goalRadarData.goalDataOpp.push(0)
+        } else {
+          this.goalRadarData.goalDataTeam.push(total)
+        }
+      }
+      for (const time in this.data.goals.against.minute) {
+        const total = this.data.goals.against.minute[time].total
+        if (!total) {
+          this.goalRadarData.goalDataOpp.push(0)
+        } else {
+          this.goalRadarData.goalDataOpp.push(total)
+        }
+
+
+      }
+      this.loadCharts = true
     },
     selectPlayer(playerId) {
       console.log(playerId)
