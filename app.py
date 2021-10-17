@@ -38,7 +38,7 @@ else:
 db.init_app(app)
 migrate = Migrate(app, db)
 
-# Resources
+# Resources //
 api.add_resource(Login, '/api/auth/login')
 api.add_resource(Register, '/api/auth/register')
 api.add_resource(Session, '/api/auth/session')
