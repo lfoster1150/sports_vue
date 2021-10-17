@@ -52,6 +52,7 @@
         @selectPlayer="selectPlayer"
         @favoritePlayer="favoritePlayer"
       />
+      <TeamStats :data="data" />
     </v-container>
   </v-container>
 </template>
@@ -63,6 +64,7 @@ import { AddPlayerToUser } from '../services/PlayerServices'
 import PlayerCard from '../components/PlayerCard.vue'
 import Form from '../components/Form.vue'
 import GoalsChart from '../charts/GoalsChart'
+import TeamStats from '../components/TeamStats.vue'
 
 export default {
   name: 'Team',
@@ -75,12 +77,17 @@ export default {
       goalDataTeam: [],
       goalDataOpp: [],
     },
+    tableData: {
+      tableItems: [],
+      tableHeaders: [],
+    },
     loadCharts: false
   }),
   components: {
     PlayerCard,
     Form,
-    GoalsChart
+    GoalsChart,
+    TeamStats
   },
   computed: {
     ...mapState({
@@ -116,11 +123,10 @@ export default {
         } else {
           this.goalRadarData.goalDataOpp.push(total)
         }
-
-
       }
       this.loadCharts = true
     },
+
     selectPlayer(playerId) {
       console.log(playerId)
       //this.$router.push(`/player/${playerId}`)
