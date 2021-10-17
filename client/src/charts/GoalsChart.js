@@ -18,12 +18,12 @@ export default {
         datasets: [
           {
             label: 'Team Goals',
-            backgroundColor: 'rgba(179,181,198,0.2)',
-            borderColor: 'rgba(179,181,198,1)',
-            pointBackgroundColor: 'rgba(179,181,198,1)',
+            backgroundColor: 'rgba(4, 184, 139, 0.2)',
+            borderColor: '#04B88B',
+            pointBackgroundColor: '#04B88B',
             pointBorderColor: '#fff',
             pointHoverBackgroundColor: '#fff',
-            pointHoverBorderColor: 'rgba(179,181,198,1)',
+            pointHoverBorderColor: '#04B88B',
             data: this.data.goalDataTeam
           },
           {

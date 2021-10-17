@@ -29,15 +29,17 @@
   </v-container>
   </v-container>
   <v-container>
-    <p class="text-h5 text--primary">
-      Top Leagues:
-    </p>
-    <LeagueCard
+    <div class="text-h5 mb-0 text-center">
+      Top Leagues
+    </div>
+    <v-container class="d-flex flex-row flex-wrap justify-space-around">
+      <LeagueCard
         v-for="league in leagues"
         :key="league.id"
         :league="league"
         @selectLeague="selectLeague"
       />
+    </v-container>
   </v-container>
 </v-container>
   
@@ -53,16 +55,16 @@ export default {
   data: () => ({
     leagues: [
       {name: "Premier League", id: "39", location: "England" },
-      {name: "Championship", id: "40", location: "England" },
       {name: "La Liga", id: "140", location: "Spain"},
-      {name: "Segunda Division", id: "141", location: "Spain"},
       {name: "Bundesliga 1", id: "78", location: "Germany"},
-      {name: "Bundesliga 2", id: "79", location: "Germany"},
       {name: "Serie A", id: "135", location: "Italy"},
-      {name: "Serie B", id: "136", location: "Italy"},
       {name: "Ligue 1", id: "61", location: "France"},
-      {name: "Ligue 2", id: "62", location: "France"},
       {name: "Major League Soccer", id: "253", location: "United States"},
+      {name: "Championship", id: "40", location: "England" },
+      {name: "Segunda Division", id: "141", location: "Spain"},
+      {name: "Bundesliga 2", id: "79", location: "Germany"},
+      {name: "Serie B", id: "136", location: "Italy"},
+      {name: "Ligue 2", id: "62", location: "France"},
     ],
     page: ''
   }),

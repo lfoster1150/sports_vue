@@ -1,9 +1,12 @@
 <template>
+<v-hover>
+  <template v-slot:default="{ hover }">
   <v-card
   fluid
     color="#191919"
     dark
     width="150px"
+    :elevation="hover ? 24 : 6"
     class="ma-2 pa-1"
   >
     <div class="d-flex flex-column align-center ">
@@ -44,6 +47,8 @@
       </v-row>
     </div>
   </v-card>
+    </template>
+</v-hover>
 </template>
 
 <script>
@@ -71,5 +76,8 @@ export default {
 <style scoped>
   .rounded-circle{
     border: 3px solid #04B88B;
+  }
+  .v-card {
+    border: 10px solid #04B88B;
   }
 </style>

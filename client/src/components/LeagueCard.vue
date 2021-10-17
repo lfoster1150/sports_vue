@@ -1,14 +1,14 @@
 <template>
-  <v-container  >
-      <v-row  class="d-flex justify-center">
-        <v-col cols="10" class="d-flex justify-center">
+<v-hover>
+  <template v-slot:default="{ hover }">
           <v-card
             color="primary"
             dark
             width="425"
             min-width="425"
+            :elevation="hover ? 24 : 6"
+            class="ma-2 pa-1"
             @click="selectLeague(league.id)"
-            hover
           >
             <div 
               class="d-flex flex-no-wrap justify-space-between"
@@ -35,9 +35,8 @@
               </v-avatar>
             </div>
           </v-card>
-        </v-col>
-      </v-row>
-    </v-container>
+    </template>
+</v-hover>
 </template>
 
 <script>
