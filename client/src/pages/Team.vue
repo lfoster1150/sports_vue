@@ -34,8 +34,12 @@
           </v-card>
       </v-row>
     </v-container>
-
-
+    <v-container fluid >
+      <Form 
+        :form="data.form"
+      />
+      <GoalsChart />
+    </v-container>
     <v-container fluid class="d-flex flex-row flex-wrap justify-space-around">
       <PlayerCard
         v-for="player in players"
@@ -54,6 +58,8 @@ import { mapState, mapActions } from 'vuex'
 import { mapCacheActions } from 'vuex-cache';
 import { AddPlayerToUser } from '../services/PlayerServices'
 import PlayerCard from '../components/PlayerCard.vue'
+import Form from '../components/Form.vue'
+import GoalsChart from '../charts/GoalsChart'
 
 export default {
   name: 'Team',
@@ -63,7 +69,9 @@ export default {
     data: null
   }),
   components: {
-    PlayerCard
+    PlayerCard,
+    Form,
+    GoalsChart
   },
   computed: {
     ...mapState({
