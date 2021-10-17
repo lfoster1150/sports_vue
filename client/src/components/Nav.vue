@@ -5,10 +5,15 @@
         color="#1E1E1E"
         dark
       >
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title>SportsVue</v-toolbar-title>
-
+      <router-link to="/">
+        <v-toolbar-title>SportsVue</v-toolbar-title>
+      </router-link>
       <v-spacer></v-spacer>
+      <router-link v-if="authenticated && user" :to="`/user/${user.id}`">
+        <v-btn icon>
+          <v-icon>mdi-account-star</v-icon>
+        </v-btn>
+      </router-link>
       <router-link to="/">
         <v-btn icon>
           <v-icon>mdi-home</v-icon>
@@ -31,33 +36,15 @@
         <v-list-item v-if="!authenticated && !user" @click="signIn">
           <v-list-item-title>Sign In</v-list-item-title>
         </v-list-item>
+        <v-list-item v-if="!authenticated && !user" @click="register">
+          <v-list-item-title>Register</v-list-item-title>
+        </v-list-item>
         <v-list-item v-else @click="signOut">
           <v-list-item-title>Sign Out</v-list-item-title>
         </v-list-item>
       </v-list>
     </v-menu>
     </v-app-bar>
-    <v-navigation-drawer
-      v-model="drawer"
-      absolute
-      temporary
-    >
-      <v-list
-        nav
-        dense
-      >
-        <v-list-item-group
-          v-model="group"
-        >      
-            <router-link to="/">
-              <v-list-item>Home</v-list-item>
-            </router-link>
-            <router-link to="/register">
-              <v-list-item v-if="!authenticated && !user">Register</v-list-item>
-            </router-link>
-        </v-list-item-group>
-      </v-list>
-    </v-navigation-drawer>
   </div>
 </template>
 
@@ -91,6 +78,9 @@ export default {
     },
     signIn() {
       this.$router.push(`/`)
+    },
+    register() {
+      this.$router.push(`/register`)
     }
   },
 }
