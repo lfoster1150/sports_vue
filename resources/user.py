@@ -64,7 +64,7 @@ class UserTeams(Resource):
         team = Team.find_by_id(data["team_id"])
         user.user_teams.append(team)
         db.session.commit()
-        return {"user": user.json()["email"], "payload": data}, 201
+        return {"user": user.json()["email"], "payload": team.json()}, 201
 
     def delete(self):
         data = request.get_json()
@@ -83,7 +83,7 @@ class UserPlayers(Resource):
         player = Player.find_by_id(data["player_id"])
         user.user_players.append(player)
         db.session.commit()
-        return {"user": user.json()["email"], "payload": data}, 201
+        return {"user": user.json()["email"], "payload": player.json()}, 201
 
     def delete(self):
         data = request.get_json()

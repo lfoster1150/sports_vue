@@ -139,7 +139,7 @@ export default {
         "user_id": this.user.id
       }
       const res = await AddPlayerToUser(data)
-      this.addPlayerToUserFavorites(res)
+      this.addPlayerToUserFavorites(res.data)
     }
   },
   async mounted() {

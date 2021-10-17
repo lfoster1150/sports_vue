@@ -49,7 +49,7 @@ export default {
         "user_id": this.user.id
       }
       const res = await AddTeamToUser(data)
-      this.addTeamToUserFavorites(res)
+      this.addTeamToUserFavorites(res.data.payload)
     }
   },
   async mounted() {
