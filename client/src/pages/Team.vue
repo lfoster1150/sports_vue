@@ -38,7 +38,7 @@
           fluid
           width="80%"
           min-width="450">
-        <v-container fluid >
+        <v-container v-if="data" fluid >
           <v-row class="d-flex justify-center align-center py-10" >
             <Form 
               :form="data.form"
@@ -51,7 +51,7 @@
             />
           </v-row>
           <v-row class="d-flex justify-center align-center " >
-            <TeamStats :data="data" />
+            <TeamStats v-if="data" :data="data" />
           </v-row>
         </v-container>
       </v-card>
