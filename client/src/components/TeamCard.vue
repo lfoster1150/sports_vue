@@ -66,7 +66,7 @@
             @click="favoriteTeam(team)"
             z-indes="10"
             >
-            <v-icon>mdi-heart</v-icon>
+            <v-icon>mdi-star-circle</v-icon>
           </v-btn>
 
         <v-snackbar v-model="snackbar">

@@ -38,12 +38,41 @@
         </v-btn>
         <v-btn 
         icon
+        color="amber"
+        v-if="authenticated && user && isFavorite"
+        @click="snackbar = true"
+        >
+          <v-icon>mdi-star-circle</v-icon>
+        </v-btn>
+        <v-btn 
+        icon
         color="primary"
-        v-if="authenticated && user"
+        v-else-if="authenticated && user"
         @click="favoritePlayer(player.player)"
         >
-          <v-icon>mdi-heart</v-icon>
+          <v-icon>mdi-star-circle</v-icon>
         </v-btn>
+        <v-btn 
+        icon
+        color="primary"
+        v-else
+        disabled
+        >
+          <v-icon>mdi-star-circle</v-icon>
+        </v-btn>
+        <v-snackbar v-model="snackbar">
+          This team is already in your favorites
+            <template v-slot:action="{ attrs }">
+              <v-btn
+                color="white"
+                text
+                v-bind="attrs"
+                @click="snackbar = false"
+              >
+                Close
+              </v-btn>
+            </template>
+          </v-snackbar>
       </v-row>
     </div>
   </v-card>
@@ -55,7 +84,10 @@
 import { mapState } from 'vuex'
 export default {
   name: 'PlayerCard',
-  props: ["player", "teamLogo"],
+  props: ["player", "teamLogo",'isFavorite'],
+  data: () => ({
+    snackbar: false
+  }),
   methods: {
     selectPlayer(playerId) {
       this.$emit('selectPlayer', playerId)

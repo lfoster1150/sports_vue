@@ -61,6 +61,7 @@
           v-for="player in players"
           :key="player.player.id"
           :player="player"
+          :isFavorite="favorites.includes(player.player.id)"
           :teamLogo="data.team.logo"
           @selectPlayer="selectPlayer"
           @favoritePlayer="favoritePlayer"
@@ -81,6 +82,7 @@ import TeamStats from '../components/TeamStats.vue'
 export default {
   name: 'Team',
   data: () => ({
+    favorites: null,
     players: null,
     data: null,
     goalRadarData: {
@@ -115,6 +117,7 @@ export default {
       this.players = results.players
       this.data = results.data.data.response
       this.setGoalsChartData()
+      this.favorites = await this.checkFavorites()
     },
     setGoalsChartData() {
       let formattedLabels = Object.keys(this.data.goals.for.minute)
@@ -151,6 +154,28 @@ export default {
       }
       const res = await AddPlayerToUser(data)
       this.addPlayerToUserFavorites(res.data.payload)
+    },
+    favArray(){
+      let newArray = []
+      if (this.userFavoritePlayers,this.players) {
+        this.userFavoritePlayers.forEach(obj => {
+          this.players.forEach(obj2 =>{
+            if(parseFloat(obj.api_id) === obj2.player.id) {
+              newArray.push(obj2.player.id)
+            }
+          })
+        })
+      }
+      return newArray
+    },
+    async checkFavorites() {
+      const newArray = await this.favArray()
+      return newArray
+    }
+  },
+  watch: {
+    userFavoritePlayers: async function () {
+      this.favorites = await this.checkFavorites()
     }
   },
   async mounted() {
