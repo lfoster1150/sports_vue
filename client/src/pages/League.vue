@@ -1,9 +1,10 @@
 <template>
-  <v-container v-if="teams" fluid class="d-flex flex-row flex-wrap justify-space-around">
+  <v-container v-if="teams && favorites" fluid class="d-flex flex-row flex-wrap justify-space-around">
     <TeamCard
       v-for="team in teams"
       :key="team.team.id"
       :team="team.team"
+      :isFavorite="favorites.includes(team.team.id)"
       @selectTeam="selectTeam"
       @favoriteTeam="favoriteTeam"
     />
@@ -19,7 +20,8 @@ import TeamCard from '../components/TeamCard.vue'
 export default {
   name: 'League',
   data: () => ({
-    teams: null
+    teams: null,
+    favorites: null
   }),
   components: {
     TeamCard
@@ -29,7 +31,7 @@ export default {
       user: state => state.user,
       authenticated: state => state.authenticated,
       userFavoriteTeams: state => state.userFavoriteTeams,
-    })
+    }),
   },
   methods: {
     ...mapActions(['addTeamToUserFavorites']),
@@ -37,6 +39,7 @@ export default {
     async getLeagueTeams(leagueId) {
       let results = await this.FETCH_QUERY_BY_LEAGUE_ID(leagueId)
       this.teams = results
+      this.favorites = await this.checkFavorites()
     },
     selectTeam(teamId) {
       this.$router.push(`/team/${teamId}`)
@@ -50,10 +53,30 @@ export default {
       }
       const res = await AddTeamToUser(data)
       this.addTeamToUserFavorites(res.data.payload)
+    },
+    favArray(){
+      let newArray = []
+      console.log(this.userFavoriteTeams)
+      console.log(this.teams)
+      if (this.userFavoriteTeams) {
+        this.userFavoriteTeams.forEach(obj => {
+          this.teams.forEach(obj2 =>{
+            if(parseFloat(obj.api_id) === obj2.team.id) {
+              console.log(parseFloat(obj.api_id) , obj2.team.id)
+              newArray.push(obj2.team.id)
+            }
+          })
+        })
+      }
+      return newArray
+    },
+    async checkFavorites() {
+      const newArray = await this.favArray()
+      return newArray
     }
   },
   async mounted() {
-    this.getLeagueTeams(this.$route.params.league_id)
+    await this.getLeagueTeams(this.$route.params.league_id)
   }
 
 }

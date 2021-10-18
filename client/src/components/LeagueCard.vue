@@ -1,42 +1,42 @@
 <template>
-<v-hover>
-  <template v-slot:default="{ hover }">
-          <v-card
-            color="primary"
-            dark
-            width="425"
-            min-width="425"
-            :elevation="hover ? 24 : 6"
-            class="ma-2 pa-1"
-            @click="selectLeague(league.id)"
+  <v-hover>
+    <template v-slot:default="{ hover }">
+      <v-card
+        color="primary"
+        dark
+        width="425"
+        min-width="425"
+        :elevation="hover ? 24 : 6"
+        class="ma-2 pa-1"
+        @click="selectLeague(league.id)"
+      >
+        <div 
+          class="d-flex flex-no-wrap justify-space-between"
+          
           >
-            <div 
-              class="d-flex flex-no-wrap justify-space-between"
-              
-              >
-              <div>
-                <v-card-title
-                  class="text-h5 text-truncate"
-                  v-text="league.name"
-                ></v-card-title>
-                <v-card-subtitle v-text="league.location"></v-card-subtitle>
-              </div>
-              <v-avatar
-                class="ma-3"
-                size="125"
-                tile
-              >
-                <v-img 
-                contain 
-                :src="`https://media.api-sports.io/football/leagues/${league.id}.png`"
-                elevation="10"
-                @click="selectLeague(league.id)"
-                ></v-img>
-              </v-avatar>
-            </div>
-          </v-card>
+          <div>
+            <v-card-title
+              class="text-h5 text-truncate"
+              v-text="league.name"
+            ></v-card-title>
+            <v-card-subtitle v-text="league.location"></v-card-subtitle>
+          </div>
+          <v-avatar
+            class="ma-3"
+            size="125"
+            tile
+          >
+            <v-img 
+            contain 
+            :src="`https://media.api-sports.io/football/leagues/${league.id}.png`"
+            elevation="10"
+            @click="selectLeague(league.id)"
+            ></v-img>
+          </v-avatar>
+        </div>
+      </v-card>
     </template>
-</v-hover>
+  </v-hover>
 </template>
 
 <script>

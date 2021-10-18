@@ -13,7 +13,7 @@
     <div class="d-flex flex-column align-center div-pointer" @click="selectTeam(team.id)">
       <div>
         <v-card-title
-          class="text-h6 text-truncate "
+          class="text-h6 text-truncate"
           v-text="team.name"
         ></v-card-title>
       </div>
@@ -25,7 +25,6 @@
         <v-img 
           contain 
           :src="`https://media.api-sports.io/football/teams/${team.id}.png`"
-          
         ></v-img>
       </v-avatar>
     </div>
@@ -39,15 +38,51 @@
           >
             <v-icon>mdi-information</v-icon>
           </v-btn>
+
           <v-btn 
-          icon
-          color="primary"
-          v-if="authenticated && user"
-          @click="favoriteTeam(team)"
-          z-indes="10"
-          >
+            icon
+            color="amber"
+            v-if="authenticated && user && isFavorite"
+            z-indes="10"
+            @click="snackbar = true"
+            >
+            <v-icon>mdi-star-circle</v-icon>
+          </v-btn>
+          
+          <v-btn 
+            icon
+            color="primary"
+            v-else-if="authenticated && user"
+            @click="favoriteTeam(team)"
+            z-indes="10"
+            >
+            <v-icon>mdi-star-circle</v-icon>
+          </v-btn>
+
+          <v-btn 
+            icon
+            color="grey"
+            v-else
+            @click="favoriteTeam(team)"
+            z-indes="10"
+            >
             <v-icon>mdi-heart</v-icon>
           </v-btn>
+
+        <v-snackbar v-model="snackbar">
+          This team is already in your favorites
+            <template v-slot:action="{ attrs }">
+              <v-btn
+                color="white"
+                text
+                v-bind="attrs"
+                @click="snackbar = false"
+              >
+                Close
+              </v-btn>
+            </template>
+          </v-snackbar>
+
         </v-row>
       </v-card-actions>
     </div>
@@ -60,9 +95,10 @@
 import { mapState } from 'vuex'
 export default {
   name: 'TeamCard',
-  props: {
-    team: {}
-  },
+  props:['team', 'isFavorite'],
+  data: () => ({
+    snackbar: false
+  }),
   methods: {
     selectTeam(teamId) {
       this.$emit('selectTeam', teamId)
