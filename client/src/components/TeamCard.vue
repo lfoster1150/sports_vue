@@ -1,8 +1,11 @@
 <template>
+<v-hover>
+  <template v-slot:default="{ hover }">
   <v-card
   fluid
     color="#1E1E1E"
     dark
+    :elevation="hover ? 24 : 6"
     width="200px"
     class="ma-2 rounded-xl"
     
@@ -49,6 +52,8 @@
       </v-card-actions>
     </div>
   </v-card>
+  </template>
+</v-hover>
 </template>
 
 <script>

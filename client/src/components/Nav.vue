@@ -2,11 +2,11 @@
   <div>
     <v-app-bar
         app
-        color="#1E1E1E"
+        color="secondary"
         dark
       >
       <router-link to="/">
-        <v-toolbar-title>SportsVue</v-toolbar-title>
+        <v-toolbar-title >SportsVue</v-toolbar-title>
       </router-link>
       <v-spacer></v-spacer>
       <router-link v-if="authenticated && user" :to="`/user/${user.id}`">
@@ -87,13 +87,12 @@ export default {
 </script>
 
 <style scoped>
+  @import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
   a {
     text-decoration: none;
   }
-  .v-list-item:hover {
-    cursor: pointer;
-  }
-  .router-link-active > .v-btn > .v-btn__content > .v-icon {
-    color: "primary"
+  .v-application a {
+    color: white;
+    font-family: 'Alfa Slab One', cursive;
   }
 </style>
