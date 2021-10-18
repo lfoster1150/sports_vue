@@ -56,7 +56,7 @@
         </v-container>
       </v-card>
       </v-row>
-      <v-container fluid class="d-flex flex-row flex-wrap justify-space-around">
+      <v-container v-if="players && favorites" fluid class="d-flex flex-row flex-wrap justify-space-around">
         <PlayerCard
           v-for="player in players"
           :key="player.player.id"

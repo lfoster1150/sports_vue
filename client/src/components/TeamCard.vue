@@ -63,7 +63,7 @@
             icon
             color="grey"
             v-else
-            @click="favoriteTeam(team)"
+            disabled
             z-indes="10"
             >
             <v-icon>mdi-star-circle</v-icon>

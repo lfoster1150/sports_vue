@@ -61,7 +61,7 @@
           <v-icon>mdi-star-circle</v-icon>
         </v-btn>
         <v-snackbar v-model="snackbar">
-          This team is already in your favorites
+          This player is already in your favorites
             <template v-slot:action="{ attrs }">
               <v-btn
                 color="white"

@@ -1,11 +1,11 @@
 <template>
   <v-app>
-    <Nav />
-    <v-main>
-      <v-container fluid>
-        <router-view></router-view>
-      </v-container>
-    </v-main>
+      <Nav />
+      <v-main>
+        <v-container fluid>
+          <router-view></router-view>
+        </v-container>
+      </v-main>
   </v-app>
 </template>
 
