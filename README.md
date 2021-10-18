@@ -53,10 +53,10 @@ The Trello board that was used to plan and this project and track development ca
 
 - [x] Integrate team Statistics from API
 - [x] Use vue-chartjs to display team stats stylishly
-- [] Integrate player Statistics from API
-- [] Use vue-chartjs to display team stats stylishly
-- [] add more leagues
-- [] add more sports
+- [ ] Integrate player Statistics from API
+- [ ] Use vue-chartjs to display team stats stylishly
+- [ ] add more leagues
+- [ ] add more sports
 
 ### **_Credits_**
 
