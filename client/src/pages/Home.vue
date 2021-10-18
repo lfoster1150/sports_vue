@@ -59,7 +59,7 @@ export default {
       {name: "Bundesliga 1", id: "78", location: "Germany"},
       {name: "Serie A", id: "135", location: "Italy"},
       {name: "Ligue 1", id: "61", location: "France"},
-      {name: "Major League Soccer", id: "253", location: "United States"},
+      {name: "MLS", id: "253", location: "United States"},
       {name: "Championship", id: "40", location: "England" },
       {name: "Segunda Division", id: "141", location: "Spain"},
       {name: "Bundesliga 2", id: "79", location: "Germany"},

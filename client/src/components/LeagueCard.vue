@@ -5,7 +5,6 @@
         color="primary"
         dark
         width="425"
-        min-width="425"
         :elevation="hover ? 24 : 6"
         class="ma-2 pa-1"
         @click="selectLeague(league.id)"
@@ -14,9 +13,8 @@
           class="d-flex flex-no-wrap justify-space-between"
           
           >
-          <div>
+          <div class="d-flex flex-column">
             <v-card-title
-              class="text-h5 text-truncate"
               v-text="league.name"
             ></v-card-title>
             <v-card-subtitle v-text="league.location"></v-card-subtitle>

@@ -7,15 +7,15 @@
     dark
     :elevation="hover ? 24 : 6"
     width="200px"
-    class="ma-2 rounded-xl"
+    class="ma-2 rounded-l"
     
   >
     <div class="d-flex flex-column align-center div-pointer" @click="selectTeam(team.id)">
       <div>
-        <v-card-title
+        <v-card-text
           class="text-h6 text-truncate"
           v-text="team.name"
-        ></v-card-title>
+        ></v-card-text>
       </div>
       <v-avatar
         class="ma-3"
@@ -119,5 +119,8 @@ export default {
 <style scoped>
   .div-pointer {
     cursor: pointer;
+  }
+  .v-card-title {
+    font-size:8vw
   }
 </style>
