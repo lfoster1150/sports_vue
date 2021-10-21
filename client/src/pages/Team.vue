@@ -154,6 +154,7 @@ export default {
       }
       const res = await AddPlayerToUser(data)
       this.addPlayerToUserFavorites(res.data.payload)
+      this.favorites.push[res.data.payload]
     },
     favArray(){
       let newArray = []
