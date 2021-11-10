@@ -158,7 +158,7 @@ export default {
     },
     favArray(){
       let newArray = []
-      if (this.userFavoritePlayers,this.players) {
+      if (this.userFavoritePlayers.length > 0 && this.players) {
         this.userFavoritePlayers.forEach(obj => {
           this.players.forEach(obj2 =>{
             if(parseFloat(obj.api_id) === obj2.player.id) {
