@@ -107,7 +107,7 @@ const actions = {
       `https://v3.football.api-sports.io/teams/statistics?league=${leagueId}&season=2021&team=${id}`
     )
     const res = await FootballClient.get(
-      `${BASE_URL}/players?season=2021&team=${id}`
+      `${BASE_URL}/players?season=2021&team=${id}&page=1`
     )
     finalResult = res.data.response
     if (res.data.paging.total > 1) {
