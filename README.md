@@ -39,15 +39,15 @@ The Trello board that was used to plan and this project and track development ca
 
 #### Home Page
 
-![User Page]()
+![Home Page](https://i.imgur.com/Sp8m3MX.png?2)
+
+#### League Page
+
+![League Page](https://i.imgur.com/i7ELw9Y.png?2)
 
 #### Team Details Page
 
-![Stack Page]()
-
-#### Player Details Page
-
-![Search Page]()
+![Team Page](https://i.imgur.com/WlLvhOU.png?2)
 
 ### **_Future Updates_**
 
