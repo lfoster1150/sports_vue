@@ -143,7 +143,7 @@ export default {
 
     selectPlayer(playerId) {
       console.log(playerId)
-      //this.$router.push(`/player/${playerId}`)
+      this.$router.push(`/player/${playerId}`)
     },
     async favoritePlayer(player) {
       const data = {

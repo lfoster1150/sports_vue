@@ -9,7 +9,7 @@
     :elevation="hover ? 24 : 6"
     class="ma-2 pa-1"
   >
-    <div class="d-flex flex-column align-center ">
+    <div class="d-flex flex-column align-center" @click="selectPlayer(player.player.id)">
       <div>
         <v-card-subtitle
           v-text="player.player.name"

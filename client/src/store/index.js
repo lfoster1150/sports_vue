@@ -88,7 +88,6 @@ const actions = {
     )
     return res.data.response
   },
-
   FETCH_QUERY_BY_TEAM_ID: async (_, id) => {
     let finalResult = null
     let leagueId = 0
@@ -127,6 +126,12 @@ const actions = {
       players: finalResult,
       data: data
     }
+  },
+  FETCH_QUERY_BY_PLAYER_ID: async (_, id) => {
+    const res = await FootballClient.get(
+      `${BASE_URL}/players?id=${id}&season=2021`
+    )
+    return res.data.response[0]
   }
 }
 
