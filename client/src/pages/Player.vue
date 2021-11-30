@@ -31,18 +31,20 @@
             ></v-img>
           </v-avatar>
         </div>
+        <PlayerData :player="data.player"/>
       </v-card>
     </v-row>
   </v-container>
+
 </template>
 
 <script>
 import { mapState, mapActions } from 'vuex'
 import { mapCacheActions } from 'vuex-cache';
 // import { AddPlayerToUser } from '../services/PlayerServices'
+import PlayerData from '../components/PlayerData.vue'
 // import Form from '../components/Form.vue'
 // import GoalsChart from '../charts/GoalsChart'
-// import PlayerStats from '../components/PlayerStats.vue'
 
 export default {
   name: 'Player',
@@ -60,11 +62,12 @@ export default {
     // },
     // loadCharts: false
   }),
-  //   components: {
+    components: {
+      PlayerData
   //   Form,
   //   GoalsChart,
   //   PlayerStatsStats
-  // },
+  },
   computed: {
     ...mapState({
       user: state => state.user,
