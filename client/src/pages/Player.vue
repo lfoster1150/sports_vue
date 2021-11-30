@@ -1,5 +1,38 @@
 <template>
   <v-container  v-if="data" fluid >
+    <v-row class="d-flex justify-center align-center" elevation="10">
+      <v-card
+        color="primary"
+        dark
+        width="80%"
+        min-width="450"
+      >
+        <div 
+          class="d-flex flex-no-wrap justify-space-between align-center mx-5"
+          >
+          <div>
+            <v-card-title
+              class="text-h5 text-truncate"
+              v-text="data.player.name"
+            ></v-card-title>
+            <v-card-subtitle v-text="data.statistics[0].team.name"></v-card-subtitle>
+          </div>
+          <v-spacer></v-spacer>
+          <v-avatar
+            class="ma-3"
+            size="100"
+            tile
+          >
+            <v-img
+            class="rounded-circle" 
+            contain 
+            :src="data.player.photo"
+            elevation="10"
+            ></v-img>
+          </v-avatar>
+        </div>
+      </v-card>
+    </v-row>
   </v-container>
 </template>
 
@@ -12,7 +45,7 @@ import { mapCacheActions } from 'vuex-cache';
 // import PlayerStats from '../components/PlayerStats.vue'
 
 export default {
-  name: 'Team',
+  name: 'Player',
   data: () => ({
     isFavorite: false,
     data: null,
@@ -118,3 +151,9 @@ export default {
 }
 
 </script>
+
+<style scoped>
+  .rounded-circle{
+    border: 3px solid rgb(80, 80, 80);
+  }
+</style>CC
