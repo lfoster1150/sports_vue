@@ -20,11 +20,10 @@
         </v-btn>
       </router-link>
     <v-menu>
-      <template v-slot:activator="{ on, attrs }">
+      <template v-slot:activator="{ props }">
           <v-btn
             icon
-            v-bind="attrs"
-            v-on="on"
+            v-bind="props"
           >
             <v-icon>mdi-dots-vertical</v-icon>
           </v-btn>
@@ -94,5 +93,8 @@ export default {
   .v-application a {
     color: white;
     font-family: 'Alfa Slab One', cursive;
+  }
+  .v-toolbar {
+    padding: 4px 16px;
   }
 </style>

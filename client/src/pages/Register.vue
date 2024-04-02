@@ -1,6 +1,5 @@
 <template>
   <v-container>
-    <template>
       <v-form
         ref="form"
         v-model="valid"
@@ -45,7 +44,6 @@
           Reset Form
         </v-btn>
       </v-form>
-    </template>
   </v-container>
 </template>
 

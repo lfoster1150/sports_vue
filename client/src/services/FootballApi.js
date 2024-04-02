@@ -1,6 +1,8 @@
 import Axios from 'axios'
 
-const API_KEY = process.env.VUE_APP_FOOTBALL_KEY
+const API_KEY = process.env.NODE_ENV === 'production'
+                  ? process.env.VUE_APP_FOOTBALL_KEY 
+                  : import.meta.env.VITE_VUE_APP_FOOTBALL_KEY
 
 const FootballClient = Axios.create({
   baseURL: 'https://v3.football.api-sports.io',

@@ -44,14 +44,15 @@
               :form="data.form"
             />
           </v-row>
-          <v-row class="d-flex justify-center align-center " >
+          <!-- NEED TO FIX CHARTS -->
+          <!-- <v-row class="d-flex justify-center align-center " >
             <GoalsChart
               v-if="loadCharts"
               :data="goalRadarData"
             />
-          </v-row>
+          </v-row> -->
           <v-row class="d-flex justify-center align-center " >
-            <TeamStats v-if="data" :data="data" />
+            <!-- <TeamStats v-if="data" :data="data" /> -->
           </v-row>
         </v-container>
       </v-card>
@@ -76,8 +77,8 @@ import { mapCacheActions } from 'vuex-cache';
 import { AddPlayerToUser } from '../services/PlayerServices'
 import PlayerCard from '../components/PlayerCard.vue'
 import Form from '../components/Form.vue'
-import GoalsChart from '../charts/GoalsChart'
-import TeamStats from '../components/TeamStats.vue'
+// import GoalsChart from '../charts/GoalsChart'
+// import TeamStats from '../components/TeamStats.vue'
 
 export default {
   name: 'Team',
@@ -99,8 +100,8 @@ export default {
   components: {
     PlayerCard,
     Form,
-    GoalsChart,
-    TeamStats
+    // GoalsChart,
+    // TeamStats
   },
   computed: {
     ...mapState({
@@ -116,30 +117,31 @@ export default {
       let results = await this.FETCH_QUERY_BY_TEAM_ID(teamId)
       this.players = results.players
       this.data = results.data.data.response
-      this.setGoalsChartData()
+      console.log(this.data)
+      // this.setGoalsChartData()
       this.favorites = await this.checkFavorites()
     },
-    setGoalsChartData() {
-      let formattedLabels = Object.keys(this.data.goals.for.minute)
-      this.goalRadarData.labels = formattedLabels.map(label => label +=" Minutes")
-      for (const time in this.data.goals.for.minute) {
-        const total = this.data.goals.for.minute[time].total
-        if (!total) {
-          this.goalRadarData.goalDataOpp.push(0)
-        } else {
-          this.goalRadarData.goalDataTeam.push(total)
-        }
-      }
-      for (const time in this.data.goals.against.minute) {
-        const total = this.data.goals.against.minute[time].total
-        if (!total) {
-          this.goalRadarData.goalDataOpp.push(0)
-        } else {
-          this.goalRadarData.goalDataOpp.push(total)
-        }
-      }
-      this.loadCharts = true
-    },
+    // setGoalsChartData() {
+    //   let formattedLabels = Object.keys(this.data.goals.for.minute)
+    //   this.goalRadarData.labels = formattedLabels.map(label => label +=" Minutes")
+    //   for (const time in this.data.goals.for.minute) {
+    //     const total = this.data.goals.for.minute[time].total
+    //     if (!total) {
+    //       this.goalRadarData.goalDataOpp.push(0)
+    //     } else {
+    //       this.goalRadarData.goalDataTeam.push(total)
+    //     }
+    //   }
+    //   for (const time in this.data.goals.against.minute) {
+    //     const total = this.data.goals.against.minute[time].total
+    //     if (!total) {
+    //       this.goalRadarData.goalDataOpp.push(0)
+    //     } else {
+    //       this.goalRadarData.goalDataOpp.push(total)
+    //     }
+    //   }
+    //   this.loadCharts = true
+    // },
 
     selectPlayer(playerId) {
       console.log(playerId)

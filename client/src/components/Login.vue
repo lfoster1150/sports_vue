@@ -1,6 +1,5 @@
 <template>
   <v-container>
-    <template>
       <v-form
         ref="form"
         v-model="valid"
@@ -19,7 +18,7 @@
           label="Password"
           @click:append="show = !show"
         ></v-text-field>
-        <v-row>
+        <div class="button-container">
           <v-btn
             :disabled="!valid"
             color="success"
@@ -27,17 +26,15 @@
           >
             Login
           </v-btn>
-          <v-spacer></v-spacer>
           <v-btn
             color="primary"
             @click="registerPage"
           >
             Register
           </v-btn>
-        </v-row>
-        <v-subheader v-if="loginFailed" class="error--text">Login Failed</v-subheader>
+        </div>
+        <v-list-subheader v-if="loginFailed" class="error--text">Login Failed</v-list-subheader>
       </v-form>
-    </template>
   </v-container>
 </template>
 
@@ -89,3 +86,10 @@ export default {
   }),
 }
 </script>
+
+<style scoped>
+  .button-container {
+    display: flex;
+    justify-content: space-between;
+  }
+</style>

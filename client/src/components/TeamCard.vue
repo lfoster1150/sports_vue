@@ -10,7 +10,7 @@
     class="ma-2 rounded-l"
     
   >
-    <div class="d-flex flex-column align-center div-pointer" @click="selectTeam(team.id)">
+    <div class="d-flex flex-column align-center div-pointer" @click="$emit('selectTeam', team.id)">
       <div>
         <v-card-text
           class="text-h6 text-truncate"
@@ -34,7 +34,6 @@
           <v-btn 
           color="primary"
           icon
-          @click="selectTeam(team.id)"
           >
             <v-icon>mdi-information</v-icon>
           </v-btn>
@@ -53,7 +52,7 @@
             icon
             color="primary"
             v-else-if="authenticated && user"
-            @click="favoriteTeam(team)"
+            @click="$emit('favoriteTeam', team)"
             z-indes="10"
             >
             <v-icon>mdi-star-circle</v-icon>
@@ -95,6 +94,7 @@
 import { mapState } from 'vuex'
 export default {
   name: 'TeamCard',
+  emits: ["selectTeam", "favoriteTeam"],
   props:['team', 'isFavorite'],
   data: () => ({
     snackbar: false
