@@ -13,7 +13,7 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
-import { mapCacheActions } from 'vuex-cache';
+import { mapCacheActions, cacheAction } from 'vuex-cache';
 import {AddTeamToUser} from '../services/TeamServices'
 import TeamCard from '../components/TeamCard.vue'
 
@@ -35,9 +35,19 @@ export default {
   },
   methods: {
     ...mapActions(['addTeamToUserFavorites']),
-    ...mapCacheActions(['FETCH_QUERY_BY_LEAGUE_ID']),
+    // ...mapCacheActions(['FETCH_QUERY_BY_LEAGUE_ID']),
     async getLeagueTeams(leagueId) {
-      let results = await this.FETCH_QUERY_BY_LEAGUE_ID(leagueId)
+      console.log(this.$store.cache)
+      // let results = await this.FETCH_QUERY_BY_LEAGUE_ID(leagueId)
+
+      let results = await this.$store.cache.dispatch('FETCH_QUERY_BY_LEAGUE_ID', leagueId)
+
+      /// Check that Cache works
+      /// https://dashboard.api-football.com/
+      /// https://github.com/superwf/vuex-cache
+      /// https://vuex.vuejs.org/guide/plugins.html#committing-mutations-inside-plugins
+
+      console.log(results)
       this.teams = results
       this.favorites = await this.checkFavorites()
     },

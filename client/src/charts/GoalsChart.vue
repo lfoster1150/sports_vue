@@ -1,20 +1,40 @@
-// CommitChart.js
+<template>
+  <Radar :data="data" :options="options" />
+</template>
+
+<script>
+
+import {
+  Chart as ChartJS,
+  RadialLinearScale,
+  PointElement,
+  LineElement,
+  Filler,
+  Tooltip,
+  Legend
+} from 'chart.js'
 import { Radar } from 'vue-chartjs'
 
+ChartJS.register(
+  RadialLinearScale,
+  PointElement,
+  LineElement,
+  Filler,
+  Tooltip,
+  Legend
+)
+
 export default {
-  extends: Radar,
-  data: () => ({
-    options: {
-      responsive: true,
-      maintainAspectRatio: false
-    }
-  }),
-  props: ['data'],
-  mounted() {
-    // Overwriting base render method with actual data.
-    this.renderChart(
-      {
-        labels: this.data.labels,
+  name: 'GoalsChart',
+  props:['goalData'],
+  components: {
+    Radar
+  },
+  methods: {
+    getChartConfig() {
+      return ({
+        data: {
+        labels: this.goalData.labels,
         datasets: [
           {
             label: 'Team Goals',
@@ -24,7 +44,7 @@ export default {
             pointBorderColor: '#fff',
             pointHoverBackgroundColor: '#fff',
             pointHoverBorderColor: '#04B88B',
-            data: this.data.goalDataTeam
+            data: this.goalData.goalDataTeam
           },
           {
             label: 'Opponent Goals',
@@ -34,11 +54,20 @@ export default {
             pointBorderColor: '#fff',
             pointHoverBackgroundColor: '#fff',
             pointHoverBorderColor: 'rgba(255,99,132,1)',
-            data: this.data.goalDataOpp
+            data: this.goalData.goalDataOpp
           }
         ]
       },
-      this.options
-    )
+      options: {
+        responsive: true,
+        maintainAspectRatio: false
+      }
+      })
+    }
+  },
+  data() {
+    return this.getChartConfig()
   }
 }
+
+</script>

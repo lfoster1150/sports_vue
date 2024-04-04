@@ -3,12 +3,12 @@
   <template>
     <v-expansion-panels :popout="true" :hover="true" class="mb-5" >
       <v-expansion-panel >
-        <v-expansion-panel-header  expand-icon="mdi-account-edit" disable-icon-rotate >
+        <v-expansion-panel-title  expand-icon="mdi-account-edit" disable-icon-rotate >
           Edit User Info
-        </v-expansion-panel-header>
-        <v-expansion-panel-content >
+        </v-expansion-panel-title>
+        <v-expansion-panel-text >
           <EditUser />
-        </v-expansion-panel-content>
+        </v-expansion-panel-text>
       </v-expansion-panel>
     </v-expansion-panels>
   </template>

@@ -1,10 +1,10 @@
 import { createStore } from 'vuex'
-import createCache from 'vuex-cache'
+import createVuexCache from 'vuex-cache'
 import FootballClient from '../services/FootballApi'
 const BASE_URL = `https://v3.football.api-sports.io`
 
 const store = createStore({
-  plugins: [createCache()],
+  plugins: [createVuexCache({timeout: 3000})],
   state () {
     return {
       user: null,
@@ -86,7 +86,6 @@ const store = createStore({
       const res = await FootballClient.get(
         `${BASE_URL}/teams?league=${id}&&season=2023`
       )
-      console.log(res)
       return res.data.response
     },
     FETCH_QUERY_BY_TEAM_ID: async (_, id) => {

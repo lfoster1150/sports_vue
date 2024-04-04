@@ -12,7 +12,7 @@ const darkTheme = {
 }
 
 const lightTheme = {
-  dark: true,
+  dark: false,
   colors: {
     primary: '#016B4F',
     secondary: '#04B88B',
