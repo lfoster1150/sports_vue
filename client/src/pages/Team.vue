@@ -189,4 +189,4 @@ export default {
   .team {
     height: 100px;
   }
-</style>../charts/GoalsChart.vue
+</style>
