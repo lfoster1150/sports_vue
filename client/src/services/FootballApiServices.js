@@ -1,8 +1,5 @@
 import FootballClient from './FootballApi'
-
-require('dotenv').config({
-  path: '/.env'
-})
+// import 'dotenv/config'
 
 export const GetLeagues = async () => {
   // try {
@@ -18,7 +15,7 @@ export const GetLeagues = async () => {
 export const GetLeaguesByCountryCode = async code => {
   // try {
   const res = await FootballClient.get(
-    `https://v3.football.api-sports.io/leagues?code=${code}&&season=2021`
+    `https://v3.football.api-sports.io/leagues?code=${code}&&season=2023`
   )
   return res.data
   // } catch (error) {
@@ -28,7 +25,7 @@ export const GetLeaguesByCountryCode = async code => {
 
 export const GetTeamsByLeagueId = async leagueId => {
   const res = await FootballClient.get(
-    `https://v3.football.api-sports.io/teams?league=${leagueId}&&season=2021`
+    `https://v3.football.api-sports.io/teams?league=${leagueId}&&season=2023`
   )
   return res.data
 }

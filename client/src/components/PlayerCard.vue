@@ -2,14 +2,14 @@
 <v-hover>
   <template v-slot:default="{ hover }">
   <v-card
-  fluid
-    color="#191919"
-    dark
-    width="150px"
-    :elevation="hover ? 24 : 6"
-    class="ma-2 pa-1"
+    fluid
+      color="#191919"
+      dark
+      width="150px"
+      :elevation="hover ? 24 : 6"
+      class="ma-2 pa-1"
   >
-    <div class="d-flex flex-column align-center" @click="selectPlayer(player.player.id)">
+    <div class="d-flex flex-column align-center" @click="$emit('selectPlayer', player.player.id)">
       <div>
         <v-card-subtitle
           v-text="player.player.name"
@@ -30,33 +30,33 @@
       </v-avatar> 
       <v-row class="ma-2 d-flex  space-between">
         <v-btn 
-        color="primary"
-        icon
-        @click="selectPlayer(player.player.id)"
+          color="primary"
+          icon
+          @click="$emit('selectPlayer', player.player.id)"
         >
           <v-icon>mdi-information</v-icon>
         </v-btn>
         <v-btn 
-        icon
-        color="amber"
-        v-if="authenticated && user && isFavorite"
-        @click="snackbar = true"
+          icon
+          color="amber"
+          v-if="authenticated && user && isFavorite"
+          @click="snackbar = true"
         >
           <v-icon>mdi-star-circle</v-icon>
         </v-btn>
         <v-btn 
-        icon
-        color="primary"
-        v-else-if="authenticated && user"
-        @click="favoritePlayer(player.player)"
+          icon
+          color="primary"
+          v-else-if="authenticated && user"
+          @click="$emit('favoritePlayer', player.player)"
         >
           <v-icon>mdi-star-circle</v-icon>
         </v-btn>
         <v-btn 
-        icon
-        color="primary"
-        v-else
-        disabled
+          icon
+          color="primary"
+          v-else
+          disabled
         >
           <v-icon>mdi-star-circle</v-icon>
         </v-btn>
@@ -84,6 +84,7 @@
 import { mapState } from 'vuex'
 export default {
   name: 'PlayerCard',
+  emits: ["selectPlayer", "favoritePlayer"],
   props: ["player", "teamLogo",'isFavorite'],
   data: () => ({
     snackbar: false

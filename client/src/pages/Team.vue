@@ -47,7 +47,7 @@
           <v-row class="d-flex justify-center align-center " >
             <GoalsChart
               v-if="loadCharts"
-              :data="goalRadarData"
+              :goalData="goalRadarData"
             />
           </v-row>
           <v-row class="d-flex justify-center align-center " >
@@ -76,7 +76,7 @@ import { mapCacheActions } from 'vuex-cache';
 import { AddPlayerToUser } from '../services/PlayerServices'
 import PlayerCard from '../components/PlayerCard.vue'
 import Form from '../components/Form.vue'
-import GoalsChart from '../charts/GoalsChart'
+import GoalsChart from '../charts/GoalsChart.vue'
 import TeamStats from '../components/TeamStats.vue'
 
 export default {
@@ -142,7 +142,6 @@ export default {
     },
 
     selectPlayer(playerId) {
-      console.log(playerId)
       this.$router.push(`/player/${playerId}`)
     },
     async favoritePlayer(player) {

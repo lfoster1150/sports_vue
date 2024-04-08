@@ -7,7 +7,7 @@
         width="425"
         :elevation="hover ? 24 : 6"
         class="ma-2 pa-1"
-        @click="selectLeague(league.id)"
+        @click="$emit('selectLeague', league.id)"
       >
         <div 
           class="d-flex flex-no-wrap justify-space-between"
@@ -28,7 +28,7 @@
             contain 
             :src="`https://media.api-sports.io/football/leagues/${league.id}.png`"
             elevation="10"
-            @click="selectLeague(league.id)"
+            @click="$emit('selectLeague', league.id)"
             ></v-img>
           </v-avatar>
         </div>
@@ -40,6 +40,7 @@
 <script>
 export default {
   name: 'Home',
+  emits: ["selectLeague"],
   props: {
     league: {}
   },

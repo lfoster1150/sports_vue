@@ -1,38 +1,29 @@
 <template>
-  <v-container>
-
-  <template>
-    <v-row justify="center">
-      <v-expansion-panels accordion >
+      <v-expansion-panels >
         <v-expansion-panel>
-          <v-expansion-panel-header color="primary">Fixture Stats</v-expansion-panel-header>
-          <v-expansion-panel-content v-if="data" color="primary">
-            <TeamTable 
-              :items="fixturesData"
+          <v-expansion-panel-title color="primary">Fixture Stats</v-expansion-panel-title>
+          <v-expansion-panel-text >
+            <v-data-table-virtual
+              density="compact"
               :headers="fixturesHeaders"
-            />
-          </v-expansion-panel-content>
+              :items="fixturesData"
+              item-value="name"
+              class="elevation-1" 
+            >
+            </v-data-table-virtual>
+          </v-expansion-panel-text>
         </v-expansion-panel>
       </v-expansion-panels>
-    </v-row>
-  </template>
-
-
-
-  </v-container>
+  
 </template>
 
 <script>
-import TeamTable from '../components/TeamTable.vue'
 export default {
   name: 'TeamStats',
   props: ['data'],
-  components:{
-    TeamTable
-  },
   data: () => ({
     fixturesData: [],
-    fixturesHeaders: []
+    fixturesHeaders: [],
   }),
   methods: {
     setData() {
@@ -64,14 +55,14 @@ export default {
       ]
       this.fixturesHeaders = [
         {
-          text: 'Fixtures',
+          title: 'Fixtures',
+          key: 'name',
           align: 'start',
-          sortable: false,
-          value: 'name',
+          
         },
-        { text: 'Home', value: 'home', sortable: false },
-        { text: 'Away', value: 'away', sortable: false },
-        { text: 'Total', value: 'total', sortable: false }
+        { title: 'Home', key: 'home', align: 'end'},
+        { title: 'Away', key: 'away', align: 'end' },
+        { title: 'Total', key: 'total', align: 'end' }
       ]
     }
   },
@@ -80,3 +71,13 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  .v-data-table {
+    border: 0px inset #04B88B;
+    border-radius: 4px;
+  }
+  .v-expansion-panel-text {
+    background-color: #038564;
+  }
+</style>

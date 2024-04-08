@@ -90,10 +90,6 @@ export default {
       this.$router.push(`/player/${playerId}`)
     }
   },
-  mounted() {
-    this.page = this.$router.history.current.name
-  }
-
 }
 </script>
 
