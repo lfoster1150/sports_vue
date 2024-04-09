@@ -1,4 +1,10 @@
 {
+  "builds": [
+    {
+        "src": "./index.py",
+        "use": "@vercel/python"
+    }
+  ],
   "headers": [
     {
       "source": "/api/(.*)",
