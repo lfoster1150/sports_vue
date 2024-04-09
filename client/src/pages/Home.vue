@@ -3,8 +3,8 @@
   <v-container v-if="!authenticated && !user" class="login-container">
     <Login />
   </v-container>
-  <v-container v-if="authenticated && user" class="d-flex flex-row flex-wrap justify-space-around container-color rounded-lg" elevation="20">
-  <v-container v-if="userFavoriteTeams.length">
+  <v-container v-if="authenticated && user && userFavoriteTeams.length > 0" class="d-flex flex-row flex-wrap justify-space-around container-color rounded-lg" elevation="20">
+  <v-container v-if="userFavoriteTeams.length > 0">
     <div class="text-h5 mb-0 text-center">
       Favorites
     </div>
@@ -18,7 +18,7 @@
       @selectItem="selectTeam"
     />
   </v-container>
-  <v-container v-if="userFavoritePlayers.length  && page" fluid class="d-flex flex-row flex-wrap justify-space-around">
+  <v-container v-if="userFavoritePlayers.length && page" fluid class="d-flex flex-row flex-wrap justify-space-around">
     <UserCard
       v-for="player in userFavoritePlayers"
       :key="player.id"

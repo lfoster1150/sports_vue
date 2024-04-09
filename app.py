@@ -18,7 +18,7 @@ from models.user_player import user_players
 
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/api/*": {"origins": "*"}})
 api = Api(app)
 
 DATABASE_URL = os.getenv('DATABASE_URL')
