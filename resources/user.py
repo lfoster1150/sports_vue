@@ -12,7 +12,7 @@ from sqlalchemy.orm import joinedload
 class UserById(Resource):
     def get(self, user_id):
         user = User.query.options(joinedload(
-            'user_teams')).filter_by(id=user_id).first()
+            User.user_teams)).filter_by(id=user_id).first()
         teams = [t.json() for t in user.user_teams]
         players = [p.json() for p in user.user_players]
         return {
