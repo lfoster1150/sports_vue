@@ -39,6 +39,10 @@ else:
 db.init_app(app)
 migrate = Migrate(app, db)
 
+@app.route('/')
+def home():
+    return 'Api up!'
+
 # Resources //
 api.add_resource(Login, '/api/auth/login')
 api.add_resource(Register, '/api/auth/register')
