@@ -1,8 +1,7 @@
 {
   "functions": {
       "api/index.py": {
-        "maxDuration": 10,
-        "excludeFiles": "api/server/**"
+        "maxDuration": 10
       }
   }
 }
