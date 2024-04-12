@@ -1,7 +1,8 @@
 {
   "functions": {
       "src/index.py": {
-        "maxDuration": 10
+        "maxDuration": 10,
+        "excludeFiles": "api"
       }
   },
   "rewrites": [
