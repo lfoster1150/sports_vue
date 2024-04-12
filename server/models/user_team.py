@@ -1,4 +1,4 @@
-from server.models.db import db
+from ..models.db import db
 
 user_teams = db.Table('user_teams',
                       db.Column('user_id', db.Integer, db.ForeignKey(

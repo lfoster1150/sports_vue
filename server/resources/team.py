@@ -1,5 +1,5 @@
-from server.models.db import db
-from server.models.team import Team
+from ..models.db import db
+from ..models.team import Team
 from flask_restful import Resource
 from flask import request
 

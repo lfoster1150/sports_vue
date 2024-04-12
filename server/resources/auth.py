@@ -1,8 +1,8 @@
-from server.models.db import db
+from ..models.db import db
 from flask_restful import Resource
 from flask import request
-from models.user import User
-from middleware import create_token, gen_password, strip_token, read_token, compare_password
+from ..models.user import User
+from ..middleware import create_token, gen_password, strip_token, read_token, compare_password
 
 
 class Login(Resource):
