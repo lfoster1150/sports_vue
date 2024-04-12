@@ -1,4 +1,4 @@
-from ..models.db import db
+from .db import db
 
 user_players = db.Table('user_players',
                         db.Column('user_id', db.Integer, db.ForeignKey(

@@ -1,5 +1,5 @@
 from datetime import datetime
-from ..models.db import db
+from .db import db
 
 
 class Team(db.Model):

@@ -1,7 +1,7 @@
-from ..models.db import db
+from .db import db
 from datetime import datetime
-from ..models.user_team import user_teams
-from ..models.user_player import user_players
+from .user_team import user_teams
+from .user_player import user_players
 
 
 class User(db.Model):
