@@ -2,19 +2,19 @@ from flask import Flask
 from flask_restful import Api
 from flask_cors import CORS
 from flask_migrate import Migrate
-from api.models.db import db
+from .server.models.db import db
 import os
 
 ## import resources
-from api.resources.user import UserTeams, UserTeamsById, UserById, UserPlayers
-from api.resources.auth import Login, Register, Session, UpdatePassword
-from api.resources.team import Teams, TeamDetails, TeamAPI
-from api.resources.player import Players, PlayerDetails, PlayerAPI
-from api.models.user import User
-from api.models.team import Team
-from api.models.player import Player
-from api.models.user_team import user_teams
-from api.models.user_player import user_players
+from .server.resources.user import UserTeams, UserTeamsById, UserById, UserPlayers
+from .server.resources.auth import Login, Register, Session, UpdatePassword
+from .server.resources.team import Teams, TeamDetails, TeamAPI
+from .server.resources.player import Players, PlayerDetails, PlayerAPI
+from .server.models.user import User
+from .server.models.team import Team
+from .server.models.player import Player
+from .server.models.user_team import user_teams
+from .server.models.user_player import user_players
 
 
 app = Flask(__name__)
