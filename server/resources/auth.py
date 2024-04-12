@@ -1,4 +1,4 @@
-from models.db import db
+from server.models.db import db
 from flask_restful import Resource
 from flask import request
 from models.user import User

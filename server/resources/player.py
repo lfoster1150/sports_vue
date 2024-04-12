@@ -1,5 +1,5 @@
-from models.db import db
-from models.player import Player
+from server.models.db import db
+from server.models.player import Player
 from flask_restful import Resource
 from flask import request
 

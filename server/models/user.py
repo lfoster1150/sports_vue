@@ -1,7 +1,7 @@
-from models.db import db
+from server.models.db import db
 from datetime import datetime
-from models.user_team import user_teams
-from models.user_player import user_players
+from server.models.user_team import user_teams
+from server.models.user_player import user_players
 
 
 class User(db.Model):

@@ -1,5 +1,5 @@
 from datetime import datetime
-from models.db import db
+from server.models.db import db
 
 
 class Player(db.Model):
