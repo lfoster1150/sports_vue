@@ -1,10 +1,7 @@
 {
-  "functions": {
-      "api/index.py": {
-        "maxDuration": 10
-      }
-  }
-  ,
+  "builds":[
+    {"src": "src/api/index.py"}
+  ],
   "rewrites": [
     { "source": "/(.*)", "destination": "/api/index" }
   ]
