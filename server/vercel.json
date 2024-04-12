@@ -1,6 +1,6 @@
 {
   "functions": {
-      "/src/index.py": {
+      "src/index.py": {
         "maxDuration": 10
       }
   },
